@@ -1,29 +1,28 @@
 # Comprehensive Apache Airflow Interview Questions by Topic
 
 ## Table of Contents
+1. [Airflow Fundamentals](#airflow-fundamentals)
+2. [DAGs (Directed Acyclic Graphs)](#dags-directed-acyclic-graphs)
+3. [Operators](#operators)
+4. [Task Dependencies and Relationships](#task-dependencies-and-relationships)
+5. [XComs (Cross-Communication)](#xcoms-cross-communication)
+6. [Executors](#executors)
+7. [Scheduler](#scheduler)
+8. [Hooks and Connections](#hooks-and-connections)
+9. [Variables and Configurations](#variables-and-configurations)
+10. [Monitoring and Logging](#monitoring-and-logging)
+11. [Error Handling and Retries](#error-handling-and-retries)
+12. [Best Practices and Performance](#best-practices-and-performance)
+13. [Metadata Database](#airflow-metadata-database)
+14. [Triggers and Sensors](#triggers-and-sensors)
+15. [Advanced Topics](#advanced-topics)
+16. [Airflow 2.x Features](#airflow-2x-features)
+17. [Security](#security)
+18. [Deployment and Scaling](#deployment-and-scaling)
+19. [Integration and External Systems](#integration-and-external-systems)
+20. [Scenario-Based Questions](#scenario-based-questions)
 
-* [1. Airflow Fundamentals](#1-airflow-fundamentals)
-* [2. DAGs (Directed Acyclic Graphs)](#2-dags-directed-acyclic-graphs)
-* [3. Operators](#3-operators)
-* [4. Task Dependencies and Relationships](#4-task-dependencies-and-relationships)
-* [5. Scheduling and Execution](#5-scheduling-and-execution)
-* [6. Airflow UI and Monitoring](#6-airflow-ui-and-monitoring)
-* [7. Airflow Architecture](#7-airflow-architecture)
-* [8. Airflow Configuration and Setup](#8-airflow-configuration-and-setup)
-* [9. Airflow Plugins and Extensions](#9-airflow-plugins-and-extensions)
-* [10. Airflow Operators and Hooks](#10-airflow-operators-and-hooks)
-* [11. Airflow Testing and Debugging](#11-airflow-testing-and-debugging)
-* [12. Airflow Best Practices](#12-airflow-best-practices)
-* [13. Airflow Metadata Database](#13-airflow-metadata-database)
-* [14. Airflow Security and Authentication](#14-airflow-security-and-authentication)
-* [15. Airflow Deployment and Scaling](#15-airflow-deployment-and-scaling)
-* [16. Airflow 2.x Features](#16-airflow-2x-features)
-* [17. Security](#17-security)
-* [18. Deployment and Scaling](#18-deployment-and-scaling)
-* [19. Integration and External Systems](#19-integration-and-external-systems)
-* [20. Scenario-Based Questions](#20-scenario-based-questions)
-
-## 1. Airflow Fundamentals
+## Airflow Fundamentals
 
 ### 1. What is Apache Airflow and what problems does it solve?
 
@@ -93,7 +92,7 @@ Consider alternatives when:
 
 **Answer:** Apache Airflow was created by Maxime Beauchemin at Airbnb in 2014 to solve their growing data pipeline management challenges. It was open-sourced in June 2015 and entered the Apache Incubator in March 2016. It graduated as a top-level Apache Software Foundation project in January 2019. The tool was originally designed to address limitations in existing workflow tools, providing a programmatic, extensible, and scalable solution for workflow orchestration.
 
-## 2. DAGs (Directed Acyclic Graphs)
+## DAGs (Directed Acyclic Graphs)
 
 ### 1. What is a DAG in Airflow?
 
@@ -269,7 +268,7 @@ from airflow.models import Variable
 config = Variable.get('my_config', deserialize_json=True)
 ```
 
-## 3. Operators
+## Operators
 
 ### 1. What is an Operator in Airflow?
 
@@ -441,7 +440,7 @@ with TaskGroup('group1') as tg1:
     task2 = BashOperator(task_id='task2', bash_command='echo 2')
 ```
 
-## 4. Task Dependencies and Relationships
+## Task Dependencies and Relationships
 
 ### 1. How do you define task dependencies in Airflow?
 
@@ -683,7 +682,7 @@ cleanup = BashOperator(
 )
 ```
 
-## 5. XComs (Cross-Communication)
+## XComs (Cross-Communication)
 
 ### 1. What are XComs in Airflow?
 
@@ -885,7 +884,7 @@ metric1 = ti.xcom_pull(task_ids='explicit', key='metric1')
 
 **Best practice:** Keep XComs under 1 KB for metadata only. Use external storage for anything larger.
 
-## 6. Executors
+## Executors
 
 ### 1. What is an Executor in Airflow?
 
@@ -1078,7 +1077,7 @@ k8s_task = PythonOperator(
 
 **Before Airflow 2.0**: Only one executor per Airflow instance. Required separate Airflow deployments for different executors.
 
-## 7. Scheduler
+## Scheduler
 
 ### 1. What is the role of the Airflow Scheduler?
 
@@ -1271,7 +1270,7 @@ dag_dir_list_interval = 300     # seconds (default: 5 minutes)
 - Use `airflow dags list-import-errors` to check for issues
 - Keep DAG files lightweight to speed parsing
 
-## 8. Hooks and Connections
+## Hooks and Connections
 
 ### 1. What are Hooks in Airflow?
 
@@ -1540,7 +1539,7 @@ conn_object = psycopg2.connect(
 
 Hooks abstract the connection logic, while Connections store the configuration.
 
-## 9. Variables and Configurations
+## Variables and Configurations
 
 ### 1. What are Variables in Airflow?
 
@@ -1769,7 +1768,7 @@ data:
 
 **Best practice:** Use environment variables for environment-specific settings, airflow.cfg for defaults.
 
-## 10. Monitoring and Logging
+## Monitoring and Logging
 
 ### 1. How do you monitor DAG execution in Airflow?
 
@@ -2149,7 +2148,7 @@ airflow tasks test dag_id task_id execution_date
 airflow tasks clear dag_id --task-regex task_id --start-date 2025-01-01
 ```
 
-## 11. Error Handling and Retries
+## Error Handling and Retries
 
 ### 1. How do you handle task failures in Airflow?
 
@@ -2623,7 +2622,7 @@ if ti.state == State.FAILED:
     # Handle failure
 ```
 
-## 12. Best Practices and Performance
+## Best Practices and Performance
 
 ### 1. What are the best practices for writing efficient DAGs?
 
@@ -3225,7 +3224,7 @@ load = PythonOperator(task_id='load')  # Save results
 
 **Rule of thumb:** 5-20 tasks per DAG is typical. If more, consider TaskGroups or multiple DAGs.
 
-## 13. Metadata Database
+## Metadata Database
 
 ### 1. What is the metadata database in Airflow?
 
@@ -3331,7 +3330,7 @@ psql -h localhost -U airflow airflow_db < airflow_backup.sql
 - **Resource allocation**: Adequate CPU/memory for database server
 - **Network latency**: Low latency between Airflow and database
 
-## 14. Triggers and Sensors
+## Triggers and Sensors
 
 ### 1. What are Sensors in Airflow?
 
@@ -3503,7 +3502,7 @@ wait_for_upstream = ExternalTaskSensor(
 - Limit concurrent sensors with pools
 - Consider event-driven alternatives (deferrable operators in Airflow 2.2+)
 
-## 15. Advanced Topics
+## Advanced Topics
 
 ### 1. What are Pools in Airflow and why are they used?
 
@@ -3793,7 +3792,7 @@ with DAG(
 
 Benefits: Event-driven workflows, better data lineage, reduced unnecessary runs.
 
-## 16. Airflow 2.x Features
+## Airflow 2.x Features
 
 ### 1. What are the major differences between Airflow 1.x and 2.x?
 
@@ -3993,7 +3992,7 @@ from airflow.providers.amazon.aws.operators.s3 import S3CreateBucketOperator
 from airflow.providers.google.cloud.operators.bigquery import BigQueryInsertJobOperator
 ```
 
-## 17. Security
+## Security
 
 ### 1. How do you secure an Airflow deployment?
 
@@ -4184,7 +4183,7 @@ class CustomBackend(BaseSecretsBackend):
         pass
 ```
 
-## 18. Deployment and Scaling
+## Deployment and Scaling
 
 ### 1. How do you deploy Airflow in production?
 
@@ -4508,7 +4507,7 @@ git checkout main     # Production
 - Different values per environment (via secrets backend)
 - Environment-specific Variables
 
-## 19. Integration and External Systems
+## Integration and External Systems
 
 ### 1. How does Airflow integrate with Apache Spark?
 
@@ -4803,7 +4802,7 @@ def kafka_listener():
         trigger_dag_via_api(message.value)
 ```
 
-## 20. Scenario-Based Questions
+## Scenario-Based Questions
 
 ### 1. How would you migrate a legacy cron-based pipeline to Airflow?
 
