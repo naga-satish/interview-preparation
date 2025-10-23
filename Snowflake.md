@@ -576,7 +576,8 @@
 ## Cost Management
 
 1. **How does Snowflake pricing work (compute vs storage)?**
-   - **Compute**: Billed by credits (1 credit = ~$2-4 depending on edition/region) per-second with 60-second minimum. Warehouse size determines credit/hour rate. **Storage**: Billed monthly for compressed storage (~$23-40/TB/month). Separate charges for data transfer between regions/clouds. On-demand or pre-purchased capacity pricing available.
+    - **Compute**: Billed by credits (1 credit = $2-4 depending on edition/region) per-second with 60-second minimum. Warehouse size determines credit/hour rate. 
+    - **Storage**: Billed monthly for compressed storage ($23-40/TB/month). Separate charges for data transfer between regions/clouds. On-demand or pre-purchased capacity pricing available.
 
 2. **What are compute credits and how are they calculated?**
    - Credits measure compute consumption. X-Small = 1 credit/hour, each size doubles (Small=2, Medium=4, etc.). Charged per-second (minimum 60 seconds). Multi-cluster: credits multiply by active clusters. Snowpipe/tasks use separate serverless compute credits. Cloud services usually free if <10% of daily compute; otherwise 1 credit = 1 credit.

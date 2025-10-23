@@ -841,4 +841,4 @@ Sources
 12. [Top 90+ Data Engineer Interview Questions and Answers](https://www.netcomlearning.com/blog/data-engineer-interview-questions)
 13. [14 Data Engineer Interview Questions and How to Answer ...](https://www.coursera.org/in/articles/data-engineer-interview-questions)
 14. [Interview Questions & Answers](https://www.ctanujit.org/uploads/2/5/3/9/25393293/data_engineering_interviews.pdf)
-15. [Master Data Engineer Interview Questions: Solve Duplicate ...](https://www.youtube.com/watch?v=YyJEIRqhx.)
+15. [Master Data Engineer Interview Questions: Solve Duplicate ...](https://www.youtube.com/watch?v=YyJEIRqhxE)

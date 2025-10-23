@@ -302,7 +302,7 @@ where created_at >= '2024-01-01'
 
 Use: `select {{ fiscal_year('order_date') }} as fiscal_year`
 
-### 10. Explain the ref() and source() functions
+### 10. Explain the ref() and source() functions in DBT
 **Answer:** 
 - **ref('model_name')**: References another DBT model, creates dependency graph, resolves to correct schema/table name based on target
 - **source('source_name', 'table_name')**: References raw data tables defined in sources.yml, enables source freshness checks
