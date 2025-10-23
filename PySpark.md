@@ -21,7 +21,7 @@
 
 ## PySpark Fundamentals
 
-1. What is PySpark and how does it differ from Apache Spark?
+### 1. What is PySpark and how does it differ from Apache Spark?
 
     **PySpark** is the Python API for Apache Spark, enabling distributed data processing using Python.
     
@@ -32,7 +32,7 @@
     - PySpark slightly slower than Scala due to serialization overhead
     - PySpark leverages Python ecosystem (NumPy, Pandas, scikit-learn)
 
-2. Explain the PySpark architecture and its core components
+### 2. Explain the PySpark architecture and its core components
 
     **Architecture Layers:**
     
@@ -56,7 +56,7 @@
     - **DAG Scheduler:** Creates execution plan
     - **Task Scheduler:** Schedules tasks on executors
 
-3. What is SparkContext and SparkSession? When do you use each?
+### 3. What is SparkContext and SparkSession? When do you use each?
 
     **SparkContext:**
     - Lower-level entry point for Spark functionality
@@ -78,7 +78,7 @@
     sc = spark.sparkContext
     ```
 
-4. How does PySpark enable distributed computing?
+### 4. How does PySpark enable distributed computing?
 
     **Distribution Mechanism:**
     
@@ -101,7 +101,7 @@
     - Builds execution plan before running
     - Optimizes entire workflow
 
-5. What is the role of Py4j in PySpark?
+### 5. What is the role of Py4j in PySpark?
 
     **Py4J** is a library that enables Python programs to dynamically access Java objects in a JVM.
     
@@ -113,7 +113,7 @@
     
     **Limitation:** Adds serialization overhead compared to native Scala/Java Spark.
 
-6. Explain the concept of lazy evaluation in PySpark
+### 6. Explain the concept of lazy evaluation in PySpark
 
     **Lazy Evaluation:** Transformations are not executed immediately; only when an action is called.
     
@@ -137,7 +137,7 @@
     df3.show()
     ```
 
-7. What are the different deployment modes in PySpark?
+### 7. What are the different deployment modes in PySpark?
 
     **1. Local Mode:**
     - Runs on single machine
@@ -160,7 +160,7 @@
     - Containerized deployment
     - Modern cloud-native approach
 
-8. How do you create a SparkSession in PySpark?
+### 8. How do you create a SparkSession in PySpark?
 
     ```python
     from pyspark.sql import SparkSession
@@ -185,7 +185,7 @@
 
 ## RDD (Resilient Distributed Datasets)
 
-1. What is an RDD and what are its key characteristics?
+### 1. What is an RDD and what are its key characteristics?
 
     **RDD (Resilient Distributed Dataset)** is the fundamental data structure of Spark, representing an immutable, distributed collection of objects that can be processed in parallel.
 
@@ -219,7 +219,7 @@
     - Data divided into logical partitions
     - Each partition processed independently
 
-2. Explain the difference between RDD transformations and actions
+### 2. Explain the difference between RDD transformations and actions
 
     **Transformations** create new RDDs from existing ones (lazy), while **Actions** trigger computation and return results (eager).
 
@@ -238,7 +238,7 @@
     - Transformations return RDDs; actions return concrete values
     - Multiple transformations can be optimized together; actions execute the pipeline
 
-3. What are the different ways to create an RDD in PySpark?
+### 3. What are the different ways to create an RDD in PySpark?
 
     **1. From Python Collection** - Using `parallelize()`:
     ```python
@@ -260,7 +260,7 @@
     rdd = df.rdd
     ```
 
-4. How does RDD achieve fault tolerance?
+### 4. How does RDD achieve fault tolerance?
 
     RDDs achieve fault tolerance through **lineage tracking** instead of data replication.
 
@@ -279,7 +279,7 @@
     - Cost-effective recovery (only lost data recomputed)
     - Automatic and transparent to user
 
-5. What happens if RDD partitions are lost due to worker node failure?
+### 5. What happens if RDD partitions are lost due to worker node failure?
 
     When partitions are lost due to node failure:
 
@@ -298,7 +298,7 @@
     - For long lineage chains, use `checkpoint()` to save RDD to reliable storage
     - Truncates lineage, speeds up recovery
 
-6. Explain RDD lineage and DAG (Directed Acyclic Graph)
+### 6. Explain RDD lineage and DAG (Directed Acyclic Graph)
 
     **RDD Lineage** is the graph of all parent RDDs and transformations used to build an RDD. **DAG** is the directed acyclic graph representing the execution plan.
 
@@ -323,7 +323,7 @@
     - Fault tolerance through recomputation
     - Parallel execution planning
 
-7. What is the difference between persist() and cache() in RDD?
+### 7. What is the difference between persist() and cache() in RDD?
 
     **cache()** is a shorthand for **persist()** with default storage level (MEMORY_ONLY).
 
@@ -350,7 +350,7 @@
     rdd.persist(StorageLevel.MEMORY_AND_DISK)  # Custom storage
     ```
 
-8. When would you choose RDD over DataFrame?
+### 8. When would you choose RDD over DataFrame?
 
     Choose **RDD** when you need fine-grained control or work with unstructured data. Choose **DataFrame** for structured data and better performance.
 
@@ -375,7 +375,7 @@
 
 ## PySpark DataFrames and Datasets
 
-1. What is a DataFrame in PySpark and how does it differ from RDD?
+### 1. What is a DataFrame in PySpark and how does it differ from RDD?
 
     **DataFrame** is a distributed collection of data organized into named columns, similar to a table in a relational database.
 
@@ -393,7 +393,7 @@
 
     **In essence:** DataFrames are optimized, schema-aware abstractions built on top of RDDs, offering better performance and ease of use for structured data.
 
-2. How do you read a CSV file into a DataFrame?
+### 2. How do you read a CSV file into a DataFrame?
 
     ```python
     # Basic read
@@ -414,7 +414,7 @@
         .load("path/to/file.csv")
     ```
 
-3. How do you display the schema of a DataFrame?
+### 3. How do you display the schema of a DataFrame?
 
     ```python
     # Print schema in tree format
@@ -430,7 +430,7 @@
     dtypes = df.dtypes  # Returns list of (column_name, data_type) tuples
     ```
 
-4. What are the different ways to create a DataFrame in PySpark?
+### 4. What are the different ways to create a DataFrame in PySpark?
 
     **1. From Python List/Tuple:**
     ```python
@@ -463,7 +463,7 @@
     df = spark.read.jdbc(url, table, properties)
     ```
 
-5. How do you select specific columns from a DataFrame?
+### 5. How do you select specific columns from a DataFrame?
 
     ```python
     # Using column names as strings
@@ -485,7 +485,7 @@
     df.select(col("age") + 1, col("name"))
     ```
 
-6. Explain the difference between select() and selectExpr()
+### 6. Explain the difference between select() and selectExpr()
 
     **select()** uses column objects/names, while **selectExpr()** accepts SQL expressions as strings.
 
@@ -507,7 +507,7 @@
     **Use selectExpr() when:** You prefer SQL syntax or have complex SQL expressions
     **Use select() when:** Using Python/PySpark functions and better IDE support needed
 
-7. How do you rename columns in a PySpark DataFrame?
+### 7. How do you rename columns in a PySpark DataFrame?
 
     ```python
     # Single column - withColumnRenamed()
@@ -528,7 +528,7 @@
         df = df.withColumnRenamed(old, new)
     ```
 
-8. How do you convert a PySpark DataFrame to a Pandas DataFrame?
+### 8. How do you convert a PySpark DataFrame to a Pandas DataFrame?
 
     ```python
     # Convert entire DataFrame
@@ -544,7 +544,7 @@
 
     **Important:** Only use for small datasets that fit in driver memory.
 
-9. What are the performance implications of converting to Pandas?
+### 9. What are the performance implications of converting to Pandas?
 
     **Performance Issues:**
 
@@ -571,7 +571,7 @@
     - Consider Pandas UDFs instead for distributed operations
     - Filter/aggregate before converting
 
-10. How do you handle schema inference in DataFrames?
+### 10. How do you handle schema inference in DataFrames?
 
     **Automatic Schema Inference:**
     ```python
@@ -605,7 +605,7 @@
 
 ## Transformations
 
-1. Explain the difference between narrow and wide transformations
+### 1. Explain the difference between narrow and wide transformations
 
     **Narrow Transformations:** Each input partition contributes to at most one output partition (no shuffling).
 
@@ -623,7 +623,7 @@
 
     **Performance Impact:** Narrow transformations are much faster; minimize wide transformations when possible.
 
-2. What are examples of narrow transformations?
+### 2. What are examples of narrow transformations?
 
     **Common Narrow Transformations:**
     - `map()` - Apply function to each element
@@ -638,7 +638,7 @@
 
     All operate independently on each partition without cross-partition communication.
 
-3. What are examples of wide transformations?
+### 3. What are examples of wide transformations?
 
     **Common Wide Transformations:**
     - `groupBy()` - Group data by key (shuffle)
@@ -652,7 +652,7 @@
 
     All require data shuffling across network, creating stage boundaries.
 
-4. How do you filter rows in a DataFrame?
+### 4. How do you filter rows in a DataFrame?
 
     ```python
     from pyspark.sql.functions import col
@@ -675,7 +675,7 @@
     df.filter(~(col("age") > 25))
     ```
 
-5. How do you perform map and flatMap operations?
+### 5. How do you perform map and flatMap operations?
 
     **On RDDs:**
     ```python
@@ -697,7 +697,7 @@
 
     **Key Difference:** `map` returns same number of elements; `flatMap` can return any number and flattens the results.
 
-6. What is the difference between map() and mapPartitions()?
+### 6. What is the difference between map() and mapPartitions()?
 
     **map():** Applies function to each element individually
     **mapPartitions():** Applies function to entire partition at once (more efficient)
@@ -722,7 +722,7 @@
     - Batch processing is more efficient
     - Reduce overhead of function calls
 
-7. How do you use withColumn() to create derived columns?
+### 7. How do you use withColumn() to create derived columns?
 
     ```python
     from pyspark.sql.functions import col, when, lit
@@ -747,7 +747,7 @@
            .withColumn("col2", col("b") * 2)
     ```
 
-8. Explain the union() and unionAll() operations
+### 8. Explain the union() and unionAll() operations
 
     Both combine two DataFrames vertically (append rows).
 
@@ -775,7 +775,7 @@
 
     **Note:** Use `unionByName()` to union by column names instead of position.
 
-9. How do you remove duplicate rows from a DataFrame?
+### 9. How do you remove duplicate rows from a DataFrame?
 
     ```python
     # Remove all duplicate rows
@@ -793,7 +793,7 @@
 
     Both trigger a wide transformation (shuffle operation).
 
-10. What is the difference between distinct() and dropDuplicates()?
+### 10. What is the difference between distinct() and dropDuplicates()?
 
     **distinct():**
     - Removes duplicates based on ALL columns
@@ -820,7 +820,7 @@
 
 ## Aggregations and Grouping
 
-1. How do you perform group by operations in PySpark?
+### 1. How do you perform group by operations in PySpark?
 
     ```python
     from pyspark.sql.functions import sum, avg, count, max, min
@@ -842,7 +842,7 @@
     df.groupBy("department").agg({"salary": "sum", "age": "avg"})
     ```
 
-2. What aggregation functions are available in pyspark.sql.functions?
+### 2. What aggregation functions are available in pyspark.sql.functions?
 
     **Common Aggregation Functions:**
     - `count()` - Count rows
@@ -859,7 +859,7 @@
     - `stddev()` / `variance()` - Standard deviation/variance
     - `percentile_approx()` - Approximate percentile
 
-3. How do you implement custom aggregations in PySpark?
+### 3. How do you implement custom aggregations in PySpark?
 
     **Using Pandas UDF (Recommended):**
     ```python
@@ -879,7 +879,7 @@
     **Alternative - Use built-in functions creatively:**
     Combine existing functions to achieve custom aggregation logic when possible for better performance.
 
-4. Explain the use of agg() with multiple aggregation functions
+### 4. Explain the use of agg() with multiple aggregation functions
 
     `agg()` allows applying multiple aggregation functions in a single operation.
 
@@ -909,7 +909,7 @@
     })
     ```
 
-5. How do you perform window functions in PySpark?
+### 5. How do you perform window functions in PySpark?
 
     Window functions perform calculations across rows related to the current row.
 
@@ -931,7 +931,7 @@
     df = df.withColumn("moving_avg", avg("value").over(window_range))
     ```
 
-6. What is the difference between groupBy() and window functions?
+### 6. What is the difference between groupBy() and window functions?
 
     **groupBy():**
     - Reduces rows (aggregates to one row per group)
@@ -955,7 +955,7 @@
 
     **Use groupBy** for aggregated summaries; **use windows** when you need row-level details with aggregate context.
 
-7. How do you calculate running totals using window functions?
+### 7. How do you calculate running totals using window functions?
 
     ```python
     from pyspark.sql.window import Window
@@ -976,7 +976,7 @@
 
     The window includes all rows from the start of the partition up to the current row.
 
-8. How do you rank data within groups?
+### 8. How do you rank data within groups?
 
     ```python
     from pyspark.sql.window import Window
@@ -994,7 +994,7 @@
     - `rank()`: 1, 2, 2, 4 (skips after ties)
     - `dense_rank()`: 1, 2, 2, 3 (no gaps after ties)
 
-9. What is pivot and unpivot in PySpark?
+### 9. What is pivot and unpivot in PySpark?
 
     **Pivot:** Converts rows to columns (wide format)
     ```python
@@ -1017,7 +1017,7 @@
     df.select("id", expr("stack(2, 'col1', col1, 'col2', col2) as (name, value)"))
     ```
 
-10. How do you handle null values during aggregations?
+### 10. How do you handle null values during aggregations?
 
     **Most aggregate functions automatically ignore nulls:**
     ```python
@@ -1045,7 +1045,7 @@
 
 ## Joins and Data Manipulation
 
-1. What are the different types of joins available in PySpark?
+### 1. What are the different types of joins available in PySpark?
 
     **Join Types:**
     - **inner** (default): Returns matching rows from both DataFrames
@@ -1056,7 +1056,7 @@
     - **left_anti**: Rows from left that DON'T have match in right
     - **cross**: Cartesian product (all combinations)
 
-2. How do you perform an inner join between two DataFrames?
+### 2. How do you perform an inner join between two DataFrames?
 
     ```python
     # Simple join on common column name
@@ -1075,7 +1075,7 @@
     result = df1.join(df2, "id")  # inner join
     ```
 
-3. Explain left outer join, right outer join, and full outer join
+### 3. Explain left outer join, right outer join, and full outer join
 
     **Left Outer Join:**
     - All rows from left DataFrame
@@ -1098,7 +1098,7 @@
     df1.join(df2, "id", "outer")  # or "full", "full_outer"
     ```
 
-4. What is a cross join and when should it be avoided?
+### 4. What is a cross join and when should it be avoided?
 
     **Cross Join** produces Cartesian product (every row from left combined with every row from right).
 
@@ -1122,7 +1122,7 @@
     - Generating all combinations intentionally
     - Creating test data
 
-5. What is a broadcast join and when should you use it?
+### 5. What is a broadcast join and when should you use it?
 
     **Broadcast Join:** Small DataFrame copied to all executor nodes, avoiding shuffle of large DataFrame.
 
@@ -1148,7 +1148,7 @@
     spark.conf.set("spark.sql.autoBroadcastJoinThreshold", 10485760)  # 10MB
     ```
 
-6. How do you optimize joins for large datasets?
+### 6. How do you optimize joins for large datasets?
 
     **Optimization Strategies:**
 
@@ -1169,7 +1169,7 @@
     spark.conf.set("spark.sql.adaptive.enabled", "true")
     ```
 
-7. What is data skew and how does it affect joins?
+### 7. What is data skew and how does it affect joins?
 
     **Data Skew:** Uneven distribution of data across partitions (some keys have many more records).
 
@@ -1193,7 +1193,7 @@
     **4. Adaptive Query Execution** handles some skew automatically
     **5. Separate skewed keys** and process differently
 
-8. How do you handle null values in joins?
+### 8. How do you handle null values in joins?
 
     **Key Point:** Nulls in join keys DO NOT match (null != null in SQL).
 
@@ -1221,7 +1221,7 @@
     df1.join(df2, coalesce(df1.id, lit(-1)) == coalesce(df2.id, lit(-1)))
     ```
 
-9. What is the difference between join() and union()?
+### 9. What is the difference between join() and union()?
 
     **join():** Combines DataFrames horizontally (adds columns)
     **union():** Combines DataFrames vertically (adds rows)
@@ -1246,7 +1246,7 @@
     df1.union(df2)  # Adds df2 rows below df1
     ```
 
-10. How do you perform self-joins in PySpark?
+### 10. How do you perform self-joins in PySpark?
 
     **Self-Join:** Join DataFrame with itself (use aliases to distinguish).
 
@@ -1278,7 +1278,7 @@
 
 ## Data Handling and Quality
 
-1. How do you handle missing or null values in PySpark?
+### 1. How do you handle missing or null values in PySpark?
 
     **Detection:**
     ```python
@@ -1308,7 +1308,7 @@
     df.na.replace(["NA", "null"], None)
     ```
 
-2. What is the difference between na.drop() and na.fill()?
+### 2. What is the difference between na.drop() and na.fill()?
 
     **na.drop():** Removes rows containing null values
     **na.fill():** Replaces null values with specified values
@@ -1333,7 +1333,7 @@
 
     **Choice depends on:** Data importance, analysis requirements, and business logic.
 
-3. How do you replace specific values in a DataFrame?
+### 3. How do you replace specific values in a DataFrame?
 
     ```python
     from pyspark.sql.functions import when, col
@@ -1354,7 +1354,7 @@
     df = df.withColumn("phone", regexp_replace("phone", "-", ""))
     ```
 
-4. How do you perform data type conversions (casting)?
+### 4. How do you perform data type conversions (casting)?
 
     ```python
     from pyspark.sql.types import IntegerType, StringType, DoubleType, DateType
@@ -1376,7 +1376,7 @@
     df = df.withColumn("safe_int", col("str_col").cast("int"))  # Returns null if fails
     ```
 
-5. How do you validate data quality in PySpark?
+### 5. How do you validate data quality in PySpark?
 
     **Common Validation Checks:**
 
@@ -1403,7 +1403,7 @@
     invalid_data = df.filter(col("end_date") < col("start_date"))
     ```
 
-6. How do you detect and handle outliers?
+### 6. How do you detect and handle outliers?
 
     **Detection Methods:**
 
@@ -1441,7 +1441,7 @@
         .otherwise(col("value")))
     ```
 
-7. What strategies exist for handling duplicate data?
+### 7. What strategies exist for handling duplicate data?
 
     **1. Remove all duplicates:**
     ```python
@@ -1474,7 +1474,7 @@
     duplicates = df.groupBy("id").count().filter(col("count") > 1)
     ```
 
-8. How do you perform data sampling in PySpark?
+### 8. How do you perform data sampling in PySpark?
 
     ```python
     # Random sampling (with replacement)
@@ -1497,7 +1497,7 @@
     **fraction:** Approximate proportion of data to sample (0.0 to 1.0)
     **seed:** For reproducibility
 
-9. How do you split data into training and test sets?
+### 9. How do you split data into training and test sets?
 
     ```python
     # Simple 80/20 split
@@ -1516,7 +1516,7 @@
 
     **Important:** Use `seed` parameter for reproducibility.
 
-10. What are the best practices for data validation checks?
+### 10. What are the best practices for data validation checks?
 
     **Best Practices:**
 
@@ -1561,7 +1561,7 @@
 
 ## User-Defined Functions (UDFs)
 
-1. What is a UDF in PySpark and when should you use it?
+### 1. What is a UDF in PySpark and when should you use it?
 
     **UDF (User-Defined Function):** Custom Python function registered to use in Spark transformations.
 
@@ -1578,7 +1578,7 @@
 
     **Performance Impact:** UDFs serialize data between JVM and Python, causing overhead. Avoid when possible.
 
-2. How do you create and register a UDF?
+### 2. How do you create and register a UDF?
 
     ```python
     from pyspark.sql.functions import udf
@@ -1603,7 +1603,7 @@
     spark.sql("SELECT multiply_two(value) FROM table")
     ```
 
-3. What are the performance implications of using UDFs?
+### 3. What are the performance implications of using UDFs?
 
     **Performance Issues:**
 
@@ -1631,7 +1631,7 @@
     - Prefer built-in functions
     - Minimize UDF usage
 
-4. What is a Pandas UDF and how does it differ from regular UDFs?
+### 4. What is a Pandas UDF and how does it differ from regular UDFs?
 
     **Pandas UDF (Vectorized UDF):** Operates on batches of data as Pandas Series/DataFrames, much faster than row-by-row UDFs.
 
@@ -1661,7 +1661,7 @@
 
     **Pandas UDFs use Apache Arrow** for efficient data transfer, significantly reducing serialization overhead.
 
-5. How do you use applyInPandas() for custom aggregations?
+### 5. How do you use applyInPandas() for custom aggregations?
 
     **applyInPandas():** Applies a function to each group as a Pandas DataFrame, useful for complex grouped operations.
 
@@ -1689,7 +1689,7 @@
 
     **Use when:** Complex aggregations requiring Pandas functionality (rolling windows, custom stats).
 
-6. When should you use built-in functions instead of UDFs?
+### 6. When should you use built-in functions instead of UDFs?
 
     **Always prefer built-in functions** - they are optimized and execute in JVM.
 
@@ -1722,7 +1722,7 @@
 
     **Use UDF only when:** No built-in function can achieve the required logic.
 
-7. How do you handle exceptions in UDFs?
+### 7. How do you handle exceptions in UDFs?
 
     **Exception Handling in UDFs:**
 
@@ -1759,7 +1759,7 @@
 
     **Best Practice:** Return None or default value on error, log issues separately for debugging.
 
-8. What are the different types of Pandas UDFs?
+### 8. What are the different types of Pandas UDFs?
 
     **Pandas UDF Types (Spark 3.0+):**
 
@@ -1795,7 +1795,7 @@
 
     **Iterator variants** allow processing large partitions in batches, reducing memory usage.
 
-9. How do you test and debug UDFs?
+### 9. How do you test and debug UDFs?
 
     **Testing Strategies:**
 
@@ -1841,7 +1841,7 @@
     df.limit(10).toPandas()
     ```
 
-10. What are vectorized UDFs and their benefits?
+### 10. What are vectorized UDFs and their benefits?
 
     **Vectorized UDFs** (Pandas UDFs) operate on batches of data using Apache Arrow, providing massive performance improvements.
 
@@ -1882,7 +1882,7 @@
 
 ## Performance Optimization
 
-1. How would you optimize a slow-running PySpark job?
+### 1. How would you optimize a slow-running PySpark job?
 
     **Optimization Checklist:**
 
@@ -1923,7 +1923,7 @@
     - Adjust executor memory/cores
     - Enable adaptive query execution
 
-2. What is data partitioning and why is it important?
+### 2. What is data partitioning and why is it important?
 
     **Data Partitioning:** Dividing dataset into smaller chunks (partitions) distributed across cluster nodes.
 
@@ -1952,7 +1952,7 @@
     - Partition size: 128MB - 1GB
     - Not too many (overhead) or too few (underutilization)
 
-3. How do you repartition or coalesce a DataFrame?
+### 3. How do you repartition or coalesce a DataFrame?
 
     ```python
     # repartition() - increase or decrease partitions (full shuffle)
@@ -1970,7 +1970,7 @@
     **repartition():** Full shuffle, can increase/decrease
     **coalesce():** No full shuffle, only decrease (combines partitions)
 
-4. What is the difference between repartition() and coalesce()?
+### 4. What is the difference between repartition() and coalesce()?
 
     | Aspect | repartition() | coalesce() |
     |--------|---------------|------------|
@@ -1994,7 +1994,7 @@
     - **repartition()**: Before joins/aggregations, need even distribution
     - **coalesce()**: Before writing to reduce output files
 
-5. When should you use cache() or persist()?
+### 5. When should you use cache() or persist()?
 
     **Use When:**
     - DataFrame accessed multiple times
@@ -2025,7 +2025,7 @@
 
     **Remember:** Caching consumes memory; use judiciously.
 
-6. What are the different storage levels for persistence?
+### 6. What are the different storage levels for persistence?
 
     **Storage Levels:**
 
@@ -2051,7 +2051,7 @@
     - Disk: Slower but handles large data
     - Replication: Fault-tolerant but doubles storage
 
-7. How do you choose the optimal number of partitions?
+### 7. How do you choose the optimal number of partitions?
 
     **Guidelines:**
 
@@ -2088,7 +2088,7 @@
     spark.conf.set("spark.sql.adaptive.enabled", "true")
     ```
 
-8. What is broadcast variable and when should you use it?
+### 8. What is broadcast variable and when should you use it?
 
     **Broadcast Variable:** Read-only variable cached on each executor, avoiding repeated network transfer.
 
@@ -2121,7 +2121,7 @@
 
     **Size Limit:** Keep < 10MB for best results.
 
-9. What is an accumulator in PySpark?
+### 9. What is an accumulator in PySpark?
 
     **Accumulator:** Shared variable for aggregating values across tasks (write-only from workers, read from driver).
 
@@ -2155,7 +2155,7 @@
 
     **Important:** Only reliable values after an action is executed. Transformations may be retried.
 
-10. How do you minimize data shuffling in PySpark?
+### 10. How do you minimize data shuffling in PySpark?
 
     **Strategies to Reduce Shuffle:**
 
@@ -2180,7 +2180,7 @@
     result = df_small.join(broadcast(other_df), "key")
     ```
 
-11. What file formats are best for performance and why?
+### 11. What file formats are best for performance and why?
 
     **Best to Worst Performance:**
 
@@ -2214,7 +2214,7 @@
 
     **Recommendation:** Use Parquet for data lakes and analytical processing.
 
-12. How does partitioning data on disk improve query performance?
+### 12. How does partitioning data on disk improve query performance?
 
     **Disk Partitioning:** Organizing data into subdirectories based on column values.
 
@@ -2249,7 +2249,7 @@
 
     **Choose partition columns** with low cardinality that are frequently filtered.
 
-13. What is predicate pushdown and how does it help?
+### 13. What is predicate pushdown and how does it help?
 
     **Predicate Pushdown:** Pushing filter conditions down to the data source level, so filtering happens during data read rather than after.
 
@@ -2283,7 +2283,7 @@
 
     **Supported by:** Parquet, ORC, JDBC, Hive, Delta Lake
 
-14. How do you monitor and debug PySpark job performance?
+### 14. How do you monitor and debug PySpark job performance?
 
     **Tools and Techniques:**
 
@@ -2324,7 +2324,7 @@
     print(df.rdd.getNumPartitions())
     ```
 
-15. What Spark UI metrics are most important for optimization?
+### 15. What Spark UI metrics are most important for optimization?
 
     **Key Metrics:**
 
@@ -2365,7 +2365,7 @@
 
 ## Spark SQL and Catalyst Optimizer
 
-1. What is Spark SQL and how does it relate to DataFrames?
+### 1. What is Spark SQL and how does it relate to DataFrames?
 
     **Spark SQL:** Module for structured data processing using SQL queries or DataFrame API.
 
@@ -2387,7 +2387,7 @@
 
     **Both compile to same optimized physical plan.**
 
-2. How do you execute SQL queries in PySpark?
+### 2. How do you execute SQL queries in PySpark?
 
     ```python
     # 1. Create temp view from DataFrame
@@ -2413,7 +2413,7 @@
     spark.catalog.dropTempView("employees")
     ```
 
-3. How do you create temporary views from DataFrames?
+### 3. How do you create temporary views from DataFrames?
 
     ```python
     # Temporary view (session-scoped, overwrites if exists)
@@ -2439,7 +2439,7 @@
 
     **Temporary views** last for the session; **global temp views** can be shared across sessions.
 
-4. What is the Catalyst optimizer and how does it work?
+### 4. What is the Catalyst optimizer and how does it work?
 
     **Catalyst:** Spark's query optimization engine that transforms logical plans into optimized physical execution plans.
 
@@ -2474,7 +2474,7 @@
     - Eliminates unnecessary columns early
     - Reorders operations for efficiency
 
-5. What are the phases of query optimization in Catalyst?
+### 5. What are the phases of query optimization in Catalyst?
 
     **Catalyst Optimization Phases:**
 
@@ -2502,7 +2502,7 @@
 
     View with: `df.explain(extended=True)`
 
-6. How does Catalyst generate physical execution plans?
+### 6. How does Catalyst generate physical execution plans?
 
     **Physical Plan Generation:**
 
@@ -2530,7 +2530,7 @@
 
     Enable CBO: `spark.sql.cbo.enabled=true` and run `ANALYZE TABLE` for statistics.
 
-7. What is the Tungsten execution engine?
+### 7. What is the Tungsten execution engine?
 
     **Tungsten:** Spark's execution engine that improves performance through memory and CPU efficiency optimizations.
 
@@ -2559,7 +2559,7 @@
 
     **Benefits:** 5-10x performance improvement over traditional Spark execution for CPU-intensive workloads.
 
-8. How do you view the execution plan of a query?
+### 8. How do you view the execution plan of a query?
 
     ```python
     # Simple execution plan (physical plan only)
@@ -2585,7 +2585,7 @@
 
     Look for shuffle operations (Exchange), join strategies, and filter pushdown in the plan.
 
-9. What is the difference between logical and physical plans?
+### 9. What is the difference between logical and physical plans?
 
     **Logical Plan:**
     - **What** to compute (abstract operations)
@@ -2604,7 +2604,7 @@
 
     **Flow:** Logical Plan → Optimized Logical Plan → Physical Plan → Execution
 
-10. How does cost-based optimization work in Spark SQL?
+### 10. How does cost-based optimization work in Spark SQL?
 
     **Cost-Based Optimization (CBO):** Uses table statistics to choose optimal execution plans.
 
@@ -2640,7 +2640,7 @@
 
 ## File Formats and I/O Operations
 
-1. What file formats does PySpark support?
+### 1. What file formats does PySpark support?
 
     **Supported Formats:**
     - **Parquet** - Columnar, best for analytics
@@ -2663,7 +2663,7 @@
     df_orc = spark.read.orc("path.orc")
     ```
 
-2. What are the advantages of Parquet format?
+### 2. What are the advantages of Parquet format?
 
     **Parquet Advantages:**
 
@@ -2693,7 +2693,7 @@
 
     **Performance:** 10-100x faster than CSV for analytical queries.
 
-3. How does columnar storage benefit analytical queries?
+### 3. How does columnar storage benefit analytical queries?
 
     **Benefits:**
 
@@ -2725,7 +2725,7 @@
 
     **Ideal for:** SELECT few columns from wide tables (common in analytics).
 
-4. What is the difference between Parquet and ORC formats?
+### 4. What is the difference between Parquet and ORC formats?
 
     | Aspect | Parquet | ORC |
     |--------|---------|-----|
@@ -2744,7 +2744,7 @@
 
     Both are columnar and performant; choice often based on ecosystem.
 
-5. When would you use CSV versus Parquet?
+### 5. When would you use CSV versus Parquet?
 
     **Use CSV When:**
     - Human readability required
@@ -2769,7 +2769,7 @@
 
     **Best Practice:** Ingest CSV → Transform to Parquet for processing.
 
-6. How do you read and write JSON files in PySpark?
+### 6. How do you read and write JSON files in PySpark?
 
     ```python
     # Read JSON
@@ -2797,7 +2797,7 @@
 
     **Note:** Default expects one JSON object per line (JSON Lines format).
 
-7. How do you handle nested JSON structures?
+### 7. How do you handle nested JSON structures?
 
     ```python
     from pyspark.sql.functions import col, explode, struct
@@ -2824,7 +2824,7 @@
     df.withColumn("parsed", from_json(col("json_col"), schema))
     ```
 
-8. What is the benefit of using compression with file formats?
+### 8. What is the benefit of using compression with file formats?
 
     **Benefits:**
 
@@ -2854,7 +2854,7 @@
 
     **Trade-off:** CPU overhead for compression/decompression vs I/O savings (usually worth it).
 
-9. How do you write data with partitioning to disk?
+### 9. How do you write data with partitioning to disk?
 
     ```python
     # Partition by single column
@@ -2879,7 +2879,7 @@
     - Avoid high cardinality (creates too many small files)
     - Order by most frequently filtered columns first
 
-10. What write modes are available (append, overwrite, etc.)?
+### 10. What write modes are available (append, overwrite, etc.)?
 
     **Write Modes:**
 
@@ -2913,7 +2913,7 @@
 
     **With partitioning:** `overwrite` mode with `partitionOverwriteMode=dynamic` overwrites only affected partitions.
 
-11. How do you read data from multiple files or directories?
+### 11. How do you read data from multiple files or directories?
 
     ```python
     # Read all files in directory
@@ -2939,7 +2939,7 @@
     df = df.withColumn("source_file", input_file_name())
     ```
 
-12. How do you handle schema evolution in Parquet files?
+### 12. How do you handle schema evolution in Parquet files?
 
     **Schema Evolution:** Reading files with different schemas (columns added/removed over time).
 
@@ -2968,7 +2968,7 @@
 
 ## Spark Streaming
 
-1. What is PySpark Streaming and what are its use cases?
+### 1. What is PySpark Streaming and what are its use cases?
 
     **PySpark Streaming:** Processing continuous data streams in real-time or near-real-time.
 
@@ -2988,7 +2988,7 @@
 
     **Key Feature:** Treats streaming as unbounded table with incremental updates.
 
-2. How does Structured Streaming differ from DStreams?
+### 2. How does Structured Streaming differ from DStreams?
 
     | Aspect | Structured Streaming | DStreams |
     |--------|---------------------|----------|
@@ -3003,7 +3003,7 @@
 
     **Recommendation:** Use Structured Streaming for all new applications.
 
-3. How do you stream data using TCP/IP protocol?
+### 3. How do you stream data using TCP/IP protocol?
 
     ```python
     # Read from socket source
@@ -3030,7 +3030,7 @@
 
     **Note:** Socket source useful for testing, not production. Use Kafka, Kinesis for production.
 
-4. What are the common data sources for streaming?
+### 4. What are the common data sources for streaming?
 
     **Production Sources:**
     - **Apache Kafka** - Most common, distributed message broker
@@ -3054,7 +3054,7 @@
     df = spark.readStream.format("parquet").load("input_dir/")
     ```
 
-5. How do you implement windowing operations in streaming?
+### 5. How do you implement windowing operations in streaming?
 
     ```python
     from pyspark.sql.functions import window, col
@@ -3078,7 +3078,7 @@
     - **Sliding:** Fixed size, overlapping (e.g., last 10 mins, every 5 mins)
     - **Session:** Variable size based on inactivity gap
 
-6. What is watermarking in Structured Streaming?
+### 6. What is watermarking in Structured Streaming?
 
     **Watermark:** Threshold for how late data can arrive before being ignored, enabling state cleanup.
 
@@ -3103,7 +3103,7 @@
     - Handles late-arriving data
     - Automatic old state cleanup
 
-7. How do you handle late-arriving data?
+### 7. How do you handle late-arriving data?
 
     **Strategies:**
 
@@ -3130,7 +3130,7 @@
 
     **Trade-off:** Longer watermark = more memory vs better late data handling.
 
-8. What output modes are available in Structured Streaming?
+### 8. What output modes are available in Structured Streaming?
 
     **Output Modes:**
 
@@ -3160,7 +3160,7 @@
 
     **Choice depends on:** Query type and downstream requirements.
 
-9. How do you ensure exactly-once processing semantics?
+### 9. How do you ensure exactly-once processing semantics?
 
     **Exactly-Once Requirements:**
 
@@ -3188,7 +3188,7 @@
 
     **Structured Streaming guarantees** exactly-once with proper checkpoint and idempotent sinks.
 
-10. How do you stream data to Kafka or other sinks?
+### 10. How do you stream data to Kafka or other sinks?
 
     ```python
     # Write to Kafka
@@ -3215,7 +3215,7 @@
     spark.sql("SELECT * FROM table").show()
     ```
 
-11. What is checkpoint in streaming and why is it important?
+### 11. What is checkpoint in streaming and why is it important?
 
     **Checkpoint:** Persistent storage of streaming query state and progress for fault tolerance.
 
@@ -3240,7 +3240,7 @@
     - One checkpoint per query
     - Don't delete while query running
 
-12. How do you monitor streaming query progress?
+### 12. How do you monitor streaming query progress?
 
     ```python
     # Get query object
@@ -3276,7 +3276,7 @@
 
 ## Cluster Architecture and Resource Management
 
-1. Explain the Spark cluster architecture
+### 1. Explain the Spark cluster architecture
 
     **Spark Cluster Architecture** has a master-worker topology with three main components:
 
@@ -3304,7 +3304,7 @@
 
     **Flow:** Driver → Cluster Manager → Executors (parallel task execution) → Results back to Driver
 
-2. What are the roles of Driver and Executor nodes?
+### 2. What are the roles of Driver and Executor nodes?
 
     **Driver Node:**
     - Orchestrates Spark application
@@ -3327,7 +3327,7 @@
 
     **Key Difference:** Driver coordinates; executors execute.
 
-3. What is the Cluster Manager and what types exist?
+### 3. What is the Cluster Manager and what types exist?
 
     **Cluster Manager:** External service that manages cluster resources and allocates them to Spark applications.
 
@@ -3361,7 +3361,7 @@
     - Single machine (development)
     - No actual cluster manager
 
-4. How do you configure executor memory and cores?
+### 4. How do you configure executor memory and cores?
 
     ```python
     # Via SparkSession
@@ -3390,7 +3390,7 @@
     - Executor cores: 4-8 cores (diminishing returns beyond)
     - Leave resources for OS and other processes
 
-5. What is dynamic allocation in Spark?
+### 5. What is dynamic allocation in Spark?
 
     **Dynamic Allocation:** Automatically adjusts number of executors based on workload.
 
@@ -3417,7 +3417,7 @@
 
     **Requires:** External shuffle service enabled.
 
-6. How do you determine optimal executor configuration?
+### 6. How do you determine optimal executor configuration?
 
     **Calculation Method:**
 
@@ -3444,7 +3444,7 @@
     - Total executors: 10*3 - 1 = 29
     - Memory per executor: (64-1)/3 ≈ 21GB
 
-7. What is the difference between client and cluster deploy mode?
+### 7. What is the difference between client and cluster deploy mode?
 
     | Aspect | Client Mode | Cluster Mode |
     |--------|-------------|--------------|
@@ -3466,7 +3466,7 @@
 
     **Use client** for development/notebooks; **use cluster** for production.
 
-8. How does data locality affect performance?
+### 8. How does data locality affect performance?
 
     **Data Locality:** How close data is to the computation (executor processing it).
 
@@ -3496,7 +3496,7 @@
 
     **Optimization:** Spark automatically delays scheduling to wait for better locality.
 
-9. What happens during stage failures in a Spark job?
+### 9. What happens during stage failures in a Spark job?
 
     **Failure Recovery Process:**
 
@@ -3525,7 +3525,7 @@
     - Monitor Spark UI for repeated failures
     - Increase memory if OOM errors
 
-10. How do you handle out-of-memory errors?
+### 10. How do you handle out-of-memory errors?
 
     **Solutions by Error Type:**
 
@@ -3561,7 +3561,7 @@
 
 ## Fault Tolerance and Reliability
 
-1. How does PySpark ensure fault tolerance?
+### 1. How does PySpark ensure fault tolerance?
 
     **Fault Tolerance Mechanisms:**
 
@@ -3591,7 +3591,7 @@
 
     **Result:** Automatic recovery from node failures without data loss.
 
-2. What is checkpointing and when should you use it?
+### 2. What is checkpointing and when should you use it?
 
     **Checkpointing:** Saving RDD/DataFrame to reliable storage (HDFS, S3) to truncate lineage.
 
@@ -3623,7 +3623,7 @@
 
     **Trade-off:** Disk I/O cost vs faster recovery.
 
-3. How does data replication contribute to fault tolerance?
+### 3. How does data replication contribute to fault tolerance?
 
     **Replication in Spark:**
 
@@ -3654,7 +3654,7 @@
     - 2x storage cost for replicated cache
     - Spark prefers lineage over replication (more efficient)
 
-4. What is write-ahead logging in streaming applications?
+### 4. What is write-ahead logging in streaming applications?
 
     **Write-Ahead Log (WAL):** Records received data to reliable storage before processing (DStreams only, not Structured Streaming).
 
@@ -3679,7 +3679,7 @@
 
     **Note:** Structured Streaming doesn't need WAL due to better fault tolerance model.
 
-5. How does Spark recover from executor failures?
+### 5. How does Spark recover from executor failures?
 
     **Recovery Process:**
 
@@ -3706,7 +3706,7 @@
 
     **Key:** Lineage enables selective recomputation of only lost partitions.
 
-6. What happens when the driver fails?
+### 6. What happens when the driver fails?
 
     **Driver Failure Impact:**
 
@@ -3741,7 +3741,7 @@
     - Avoid `collect()` on large data
     - Minimize driver-side operations
 
-7. How do you implement retry mechanisms for failed tasks?
+### 7. How do you implement retry mechanisms for failed tasks?
 
     **Built-in Task Retry:**
 
@@ -3784,7 +3784,7 @@
         pass
     ```
 
-8. What is speculative execution in Spark?
+### 8. What is speculative execution in Spark?
 
     **Speculative Execution:** Running duplicate copies of slow tasks (stragglers) on other executors.
 
@@ -3812,7 +3812,7 @@
     - Consumes extra resources
     - Not suitable for all workloads
 
-9. How do you handle data corruption issues?
+### 9. How do you handle data corruption issues?
 
     **Prevention and Handling:**
 
@@ -3847,7 +3847,7 @@
     - Use replicated storage (HDFS, S3)
     - Corruption detected and recovered automatically
 
-10. What are best practices for building fault-tolerant applications?
+### 10. What are best practices for building fault-tolerant applications?
 
     **Best Practices:**
 
@@ -3887,7 +3887,7 @@
 
 ## Delta Lake and Advanced Topics
 
-1. What is Delta Lake and how does it enhance PySpark?
+### 1. What is Delta Lake and how does it enhance PySpark?
 
     **Delta Lake:** Open-source storage layer that brings ACID transactions and reliability to data lakes (Parquet-based).
 
@@ -3923,7 +3923,7 @@
     df = spark.read.format("delta").load("/path/to/table")
     ```
 
-2. What are the key features of Delta Lake?
+### 2. What are the key features of Delta Lake?
 
     **Key Features:**
 
@@ -3942,7 +3942,7 @@
 
     All features work seamlessly with standard PySpark APIs.
 
-3. How does Delta Lake provide ACID transactions?
+### 3. How does Delta Lake provide ACID transactions?
 
     **ACID Implementation:**
 
@@ -3975,7 +3975,7 @@
     df.write.format("delta").mode("append").save("/delta/table")
     ```
 
-4. What is time travel in Delta Lake?
+### 4. What is time travel in Delta Lake?
 
     **Time Travel:** Query historical versions of Delta table data.
 
@@ -4003,7 +4003,7 @@
 
     **Use Cases:** Audit trails, rollback errors, reproduce ML models, compare versions.
 
-5. How do you perform upserts (merge operations) in Delta Lake?
+### 5. How do you perform upserts (merge operations) in Delta Lake?
 
     ```python
     from delta.tables import DeltaTable
@@ -4037,7 +4037,7 @@
     ).execute()
     ```
 
-6. What is schema evolution in Delta Lake?
+### 6. What is schema evolution in Delta Lake?
 
     **Schema Evolution:** Automatically adapt table schema when writing data with new columns.
 
@@ -4067,7 +4067,7 @@
     - Change column types incompatibly
     - Rename columns (appears as drop + add)
 
-7. How does Delta Lake handle concurrent writes?
+### 7. How does Delta Lake handle concurrent writes?
 
     **Optimistic Concurrency Control:**
 
@@ -4093,7 +4093,7 @@
 
     **Best Practice:** Design for append-heavy workloads to minimize conflicts.
 
-8. What is Z-ordering optimization?
+### 8. What is Z-ordering optimization?
 
     **Z-Ordering:** Multi-dimensional clustering technique that co-locates related data in files for faster queries.
 
@@ -4120,7 +4120,7 @@
 
     **Use When:** Queries filter on multiple columns (e.g., date AND country).
 
-9. How do you implement Change Data Capture (CDC) with Delta?
+### 9. How do you implement Change Data Capture (CDC) with Delta?
 
     **CDC Pattern with Delta Lake:**
 
@@ -4157,7 +4157,7 @@
         .load("/delta/table")
     ```
 
-10. What are the benefits of using Delta Lake over Parquet?
+### 10. What are the benefits of using Delta Lake over Parquet?
 
     | Feature | Parquet | Delta Lake |
     |---------|---------|------------|
@@ -4179,7 +4179,7 @@
 
 ## Machine Learning with MLlib
 
-1. What is MLlib in PySpark?
+### 1. What is MLlib in PySpark?
 
     **MLlib:** Spark's scalable machine learning library for distributed ML on large datasets.
 
@@ -4200,7 +4200,7 @@
 
     **Use When:** Data too large for single-machine libraries (scikit-learn, etc.).
 
-2. How do you prepare data for machine learning in PySpark?
+### 2. How do you prepare data for machine learning in PySpark?
 
     ```python
     from pyspark.ml.feature import VectorAssembler, StringIndexer, StandardScaler
@@ -4227,7 +4227,7 @@
     train, test = df.randomSplit([0.8, 0.2], seed=42)
     ```
 
-3. What is a feature vector and how do you create it?
+### 3. What is a feature vector and how do you create it?
 
     **Feature Vector:** Dense or sparse array containing all input features for ML model (required by MLlib).
 
@@ -4251,7 +4251,7 @@
 
     **Result:** Single column containing all features as vector.
 
-4. What transformers and estimators are available in MLlib?
+### 4. What transformers and estimators are available in MLlib?
 
     **Transformers (transform data without learning):**
     - `VectorAssembler` - Combine columns into feature vector
@@ -4273,7 +4273,7 @@
     - `KMeans` - Clustering
     - `ALS` - Collaborative filtering
 
-5. How do you implement a machine learning pipeline?
+### 5. How do you implement a machine learning pipeline?
 
     ```python
     from pyspark.ml import Pipeline
@@ -4308,7 +4308,7 @@
 
     **Benefits:** Reproducible, maintainable, prevents data leakage.
 
-6. How do you perform feature engineering in PySpark?
+### 6. How do you perform feature engineering in PySpark?
 
     **Answer:** PySpark MLlib provides various transformers for feature engineering:
     
@@ -4321,7 +4321,7 @@
     
     Common pattern: Chain transformers in Pipeline for automated feature engineering.
 
-7. What algorithms does MLlib support?
+### 7. What algorithms does MLlib support?
 
     **Classification:**
     - Logistic Regression
@@ -4348,7 +4348,7 @@
 
     **Collaborative Filtering:** ALS (Alternating Least Squares)
 
-8. How do you train and evaluate models in PySpark?
+### 8. How do you train and evaluate models in PySpark?
 
     ```python
     from pyspark.ml.classification import LogisticRegression
@@ -4375,7 +4375,7 @@
     # Other metrics: f1, precision, recall, areaUnderPR
     ```
 
-9. How do you perform hyperparameter tuning?
+### 9. How do you perform hyperparameter tuning?
 
     ```python
     from pyspark.ml.tuning import ParamGridBuilder, CrossValidator
@@ -4409,7 +4409,7 @@
     # Alternative: TrainValidationSplit (faster, single split)
     ```
 
-10. How do you save and load trained models?
+### 10. How do you save and load trained models?
 
     ```python
     # Save model
@@ -4434,7 +4434,7 @@
 
 ## Scenario-Based and Coding Questions
 
-1. How would you remove duplicates based on specific columns?
+### 1. How would you remove duplicates based on specific columns?
 
     ```python
     # Remove duplicates based on specific columns, keeping first occurrence
@@ -4450,7 +4450,7 @@
                    .drop("rn")
     ```
 
-2. How do you find the top N records per group?
+### 2. How do you find the top N records per group?
 
     ```python
     from pyspark.sql import Window
@@ -4470,7 +4470,7 @@
               .filter(col("rank") <= 3)
     ```
 
-3. How would you implement a slowly changing dimension (SCD) Type 2?
+### 3. How would you implement a slowly changing dimension (SCD) Type 2?
 
     ```python
     from pyspark.sql.functions import current_date, lit
@@ -4510,7 +4510,7 @@
     # Use Delta merge for this operation
     ```
 
-4. How do you calculate cumulative sums across partitions?
+### 4. How do you calculate cumulative sums across partitions?
 
     ```python
     from pyspark.sql import Window
@@ -4532,7 +4532,7 @@
     df_count = df.withColumn("transaction_number", count("*").over(window))
     ```
 
-5. How would you handle a dataset with extreme data skew?
+### 5. How would you handle a dataset with extreme data skew?
 
     **Strategies:**
 
@@ -4565,7 +4565,7 @@
     spark.conf.set("spark.sql.adaptive.skewJoin.enabled", "true")
     ```
 
-6. How do you implement complex business logic across multiple tables?
+### 6. How do you implement complex business logic across multiple tables?
 
     ```python
     # Example: Calculate customer lifetime value with multiple dimensions
@@ -4606,7 +4606,7 @@
     result.write.format("delta").mode("overwrite").save("/customer_metrics")
     ```
 
-7. How would you optimize a job that processes terabytes of data daily?
+### 7. How would you optimize a job that processes terabytes of data daily?
 
     **Optimization Strategy:**
 
@@ -4656,7 +4656,7 @@
     spark.conf.set("spark.sql.adaptive.coalescePartitions.enabled", "true")
     ```
 
-8. How do you implement incremental data processing?
+### 8. How do you implement incremental data processing?
 
     ```python
     # Method 1: Watermark-based (for streaming-style batch)
@@ -4689,7 +4689,7 @@
      .execute()
     ```
 
-9. How would you debug a job failing with out-of-memory errors?
+### 9. How would you debug a job failing with out-of-memory errors?
 
     **Debugging Steps:**
 
@@ -4742,7 +4742,7 @@
     spark.conf.set("spark.memory.storageFraction", "0.5")
     ```
 
-10. How do you implement data quality checks in production pipelines?
+### 10. How do you implement data quality checks in production pipelines?
 
     ```python
     from pyspark.sql.functions import col, count, isnan, when
@@ -4794,7 +4794,7 @@
     quality_results = data_quality_checks(df, quality_rules)
     ```
 
-11. How would you handle streaming data from multiple sources?
+### 11. How would you handle streaming data from multiple sources?
 
     ```python
     # Read from multiple Kafka topics
@@ -4830,7 +4830,7 @@
         .start("/output/metrics")
     ```
 
-12. How do you implement real-time aggregations on streaming data?
+### 12. How do you implement real-time aggregations on streaming data?
 
     ```python
     from pyspark.sql.functions import window, avg, sum as _sum, count
@@ -4873,7 +4873,7 @@
         .agg(count("*").alias("actions_per_session"))
     ```
 
-13. How would you design a data pipeline for a reporting system?
+### 13. How would you design a data pipeline for a reporting system?
 
     **Architecture:**
 
@@ -4932,7 +4932,7 @@
 
     **Benefits:** Data quality improves through layers, enables both detailed and aggregated queries.
 
-14. How do you handle late-arriving facts in a data warehouse?
+### 14. How do you handle late-arriving facts in a data warehouse?
 
     ```python
     from delta.tables import DeltaTable
@@ -4978,7 +4978,7 @@
     stream_df.withWatermark("event_time", "7 days")
     ```
 
-15. How would you implement data lineage tracking in PySpark?
+### 15. How would you implement data lineage tracking in PySpark?
 
     ```python
     # Custom lineage metadata
