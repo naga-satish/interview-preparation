@@ -105,16 +105,16 @@ This repository contains **16 comprehensive guides** covering over **1,500+ inte
 |------------|-----------|-----------|--------------|
 | [Apache Airflow](Apache-Airflow.md) | ✅ | ✅ | Oct 2025 | 
 | [PySpark](PySpark.md) | ✅ | ✅ | Oct 2025 | 
-| [Data Modelling](Data-Modelling.md) |  ✅ | ✅ | Oct 2025 | 
+| [Data Modelling](Data-Modelling.md) | ✅ | ✅ | Oct 2025 | 
 | [DBT](DBT.md) | ✅ | ✅ | Oct 2025 | 
-| [Snowflake](Snowflake.md) |  ✅ | ✅ | Oct 2025 | 
-| [Apache Kafka](Apache-Kafka.md) |  ✅ |  | Oct 2025 | 
-| [Docker](Docker.md) |  ✅ |  | Oct 2025 |
-| [Kubernetes](Kubernetes.md) |  ✅ |  | Oct 2025 |
-| [AWS S3](AWS-S3.md) |  ✅ |  | Oct 2025 |
-| [Terraform](Terraform.md) |  ✅ |  | Oct 2025 |
-| [CI-CD Pipelines](CI-CD-Pipelines.md) |  ✅ |  | Oct 2025 |
-| [ML-Ops](ML-Ops.md) |  ✅ |  | Oct 2025 |
-| [ETL-ELT](ETL-ELT.md) |  ✅ |  | Oct 2025 |
-| [NoSQL](NoSQL.md) |  ✅ |  | Oct 2025 |
+| [Snowflake](Snowflake.md) | ✅ | ✅ | Oct 2025 | 
+| [Apache Kafka](Apache-Kafka.md) | ✅ |  | Oct 2025 | 
+| [Docker](Docker.md) | ✅ |  | Oct 2025 |
+| [Kubernetes](Kubernetes.md) | ✅ |  | Oct 2025 |
+| [AWS S3](AWS-S3.md) | ✅ |  | Oct 2025 |
+| [Terraform](Terraform.md) | ✅ | ✅ | Oct 2025 |
+| [CI-CD Pipelines](CI-CD-Pipelines.md) | ✅ |  | Oct 2025 |
+| [ML-Ops](ML-Ops.md) | ✅ |  | Oct 2025 |
+| [ETL-ELT](ETL-ELT.md) | ✅ |  | Oct 2025 |
+| [NoSQL](NoSQL.md) | ✅ |  | Oct 2025 |
 | [Real-time Processing](Real-time-Processing.md) | **Planned** |  |  |
