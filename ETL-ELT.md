@@ -2,159 +2,28 @@
 
 ## Table of Contents
 1. [ETL/ELT Fundamentals](#etlelt-fundamentals)
-   - What is ETL and explain its three stages
-   - What is ELT and how does it differ from ETL
-   - When would you choose ETL over ELT
-   - Advantages and disadvantages of ETL vs ELT
-   - Three-layer architecture of ETL cycle
-   - ETL mapping sheets
-   - Role of staging area
-   - Full load vs incremental load
-   - Handling slowly changing dimensions
-   - Types of SCDs (0, 1, 2, 3)
-
 2. [Data Transformation and Quality](#data-transformation-and-quality)
-   - Common data transformation operations
-   - Data cleansing techniques
-   - Data validation techniques
-   - Ensuring data quality
-   - Data profiling
-   - Handling null values
-   - Data standardization
-   - Data deduplication
-   - Lookup transformations
-   - Data type conversions
-
 3. [ETL Performance and Optimization](#etl-performance-and-optimization)
-   - Performance optimization strategies
-   - Large volume data processing
-   - Parallel processing
-   - Identifying and resolving bottlenecks
-   - Partitioning strategies
-   - SQL query optimization
-   - Pushdown vs in-memory processing
-   - Monitoring ETL job performance
-   - Big data handling techniques
-   - Implementing incremental loads
-
 4. [Data Warehousing Concepts](#data-warehousing-concepts)
-   - Data warehouse vs database
-   - Star schema
-   - Snowflake schema
-   - Fact and dimension tables
-   - Types of facts (additive, semi-additive, non-additive)
-   - Data marts
-   - OLTP vs OLAP
-   - Surrogate keys
-   - Normalization and denormalization
-   - Data warehouse architecture design
-
 5. [ETL Testing](#etl-testing)
-   - ETL testing overview
-   - Types of ETL testing
-   - Validating data accuracy
-   - Source-to-staging vs staging-to-target testing
-   - Testing transformations and business rules
-   - Key validation checks
-   - Handling rejected records
-   - Regression testing
-   - Testing business scenarios
-   - Validation tools and queries
-
 6. [ETL Tools and Technologies](#etl-tools-and-technologies)
-   - Common ETL tools (Informatica, Talend, SSIS, AWS Glue, Airflow)
-   - Apache Airflow for orchestration
-   - Cloud ETL services (AWS, Azure, GCP)
-   - Batch vs real-time streaming tools
-   - Python for ETL pipelines
-   - Apache Spark in ETL
-   - Change Data Capture (CDC)
-   - AWS Glue components
-   - dbt for transformations
-   - Containerization with Docker
-
 7. [Error Handling and Logging](#error-handling-and-logging)
-   - Implementing error handling
-   - Logging strategies
-   - Handling failed records and retry logic
-   - Job monitoring and alerting
-   - Data lineage tracking
-   - Audit log information
-   - Transactional consistency
-   - Rollback and recovery strategies
-   - Data quality alerts
-   - Pipeline health metrics
-
 8. [Data Integration Patterns](#data-integration-patterns)
-   - Integration patterns (batch, real-time, micro-batch)
-   - Real-time data streaming
-   - Lambda architecture
-   - Kappa architecture
-   - Handling heterogeneous sources
-   - API-based integration
-   - Event-driven architectures
-   - Medallion architecture (bronze, silver, gold)
-   - Schema evolution handling
-   - Data federation vs consolidation
-
 9. [SQL and Database Concepts for ETL](#sql-and-database-concepts-for-etl)
-   - Types of SQL joins
-   - UNION vs UNION ALL
-   - SQL query optimization
-   - Window functions
-   - DELETE, TRUNCATE, and DROP
-   - Upsert (MERGE) operations
-   - Indexes and performance
-   - Transaction handling
-   - Clustered vs non-clustered indexes
-   - Common Table Expressions (CTEs)
-
 10. [Data Security and Governance](#data-security-and-governance)
-    - Data security implementation
-    - Data masking
-    - Handling PII
-    - Compliance requirements
-    - Encryption (in transit and at rest)
-    - Role-based access control (RBAC)
-    - Data retention policies
-    - Data governance
-    - Data lineage and metadata management
-    - Auditing requirements
-
 11. [Scenario-Based and Problem-Solving](#scenario-based-and-problem-solving)
-    - Real-time fraud detection ETL
-    - Handling frequent schema changes
-    - Legacy system migration
-    - Late-arriving dimensions
-    - Structured and unstructured data handling
-    - Multi-tenant environment ETL
-    - Time-series data ETL
-    - Data lake implementations
-    - Pipeline dependency management
-    - Disaster recovery planning
-
 12. [Advanced ETL Concepts](#advanced-etl-concepts)
-    - Data virtualization vs ETL
-    - Data partitioning strategies
-    - Role of metadata
-    - Complex business logic transformations
-    - Horizontal vs vertical scaling
-    - Data quality frameworks
-    - Machine learning in ETL
-    - Bi-temporal data handling
-    - Reverse ETL
-    - DataOps practices
 
 ## ETL/ELT Fundamentals
 
-1. **What is ETL and explain its three stages (Extract, Transform, Load)?**
+### 1. What is ETL and explain its three stages (Extract, Transform, Load)?
    
    ETL is a data integration process that moves data from source systems to a target data warehouse.
    - **Extract**: Retrieve data from various source systems (databases, APIs, files, streams). Handles connection management, data extraction logic, and change detection.
    - **Transform**: Cleanse, validate, and convert data to match target schema. Includes data cleansing, deduplication, aggregation, joining, and applying business rules.
    - **Load**: Insert transformed data into the target data warehouse or database. Can be full load (complete refresh) or incremental load (only new/changed records).
 
-2. **What is ELT and how does it differ from ETL?**
+### 2. What is ELT and how does it differ from ETL?
    
    ELT (Extract, Load, Transform) loads raw data into the target system first, then transforms it using the target system's processing power.
    
@@ -164,7 +33,7 @@
    - ELT better suited for cloud data warehouses (Snowflake, BigQuery, Redshift) with massive compute power
    - ETL provides better data privacy (sensitive data transformed before reaching target)
 
-3. **When would you choose ETL over ELT and vice versa?**
+### 3. When would you choose ETL over ELT and vice versa?
    
    **Choose ETL when:**
    - Working with on-premise legacy systems with limited compute resources
@@ -178,7 +47,7 @@
    - Schema-on-read flexibility is beneficial
    - Working with large data volumes where target system can parallelize transformations
 
-4. **What are the advantages and disadvantages of ETL versus ELT?**
+### 4. What are the advantages and disadvantages of ETL versus ELT?
    
    **ETL Advantages:**
    - Better for data privacy (transform sensitive data before loading)
@@ -202,7 +71,7 @@
    - Requires powerful target system
    - Potentially higher cloud compute costs
 
-5. **Explain the three-layer architecture of an ETL cycle (staging, integration, access layers)?**
+### 5. Explain the three-layer architecture of an ETL cycle (staging, integration, access layers)?
    
    **Staging Layer:**
    - Temporary storage for raw extracted data
@@ -222,7 +91,7 @@
    - Denormalized for query performance
    - Contains aggregated, summarized data for reporting
 
-6. **What are ETL mapping sheets and why are they important?**
+### 6. What are ETL mapping sheets and why are they important?
    
    ETL mapping sheets document the transformation logic between source and target systems. They specify:
    - Source table/column mappings to target
@@ -238,7 +107,7 @@
    - Required for audit and compliance
    - Enables knowledge transfer and onboarding
 
-7. **What is the role of a staging area in ETL processes?**
+### 7. What is the role of a staging area in ETL processes?
    
    The staging area is a temporary storage location between source and target systems.
    
@@ -250,7 +119,7 @@
    - **Audit**: Preserves raw data for validation and troubleshooting
    - **Data integration**: Combines data from multiple sources before transformation
 
-8. **Explain full load versus incremental load in ETL?**
+### 8. Explain full load versus incremental load in ETL?
    
    **Full Load:**
    - Extracts and loads all records from source, regardless of changes
@@ -266,7 +135,7 @@
    
    Common approaches: Timestamp-based (last_modified_date), CDC (Change Data Capture), Trigger-based, Log-based replication.
 
-9. **How do you handle slowly changing dimensions (SCD) in ETL?**
+### 9. How do you handle slowly changing dimensions (SCD) in ETL?
    
    SCDs manage changes to dimension attributes over time. Implementation approach depends on business requirements:
    
@@ -280,7 +149,7 @@
    
    Common detection method: Use hash values (MD5/SHA) of attribute columns to quickly identify changes.
 
-10. **What are the different types of SCDs (Type 0, 1, 2, 3)?**
+### 10. What are the different types of SCDs (Type 0, 1, 2, 3)?
     
     **Type 0 (Retain Original):**
     - Never update; original value preserved permanently
@@ -311,7 +180,7 @@
 
 ## Data Transformation and Quality
 
-1. **What are the most common data transformation operations in ETL?**
+### 1. What are the most common data transformation operations in ETL?
    
    - **Filtering**: Removing unwanted records based on conditions
    - **Mapping**: Converting source fields to target schema
@@ -326,7 +195,7 @@
    - **Splitting**: Dividing data into multiple targets based on rules
    - **Derivation**: Calculating new fields from existing ones
 
-2. **How do you handle data cleansing in the transformation phase?**
+### 2. How do you handle data cleansing in the transformation phase?
    
    **Data cleansing involves:**
    - **Standardization**: Normalize formats (dates, phone numbers, addresses)
@@ -344,7 +213,7 @@
    - Route bad records to error tables for review
    - Document cleansing rules in transformation logic
 
-3. **What techniques do you use for data validation during ETL?**
+### 3. What techniques do you use for data validation during ETL?
    
    - **Schema validation**: Verify data types, lengths, formats match target
    - **Business rule validation**: Check domain-specific constraints (age > 0, valid state codes)
@@ -357,7 +226,7 @@
    - **Data reconciliation**: Compare record counts and totals between source and target
    - **Threshold checks**: Alert if data volumes deviate significantly from expected
 
-4. **How do you ensure data quality throughout the ETL process?**
+### 4. How do you ensure data quality throughout the ETL process?
    
    **Preventive measures:**
    - Implement data quality rules at each stage (extract, transform, load)
@@ -383,7 +252,7 @@
    - Regular data quality audits
    - Stakeholder communication on quality metrics
 
-5. **What is data profiling and when is it performed?**
+### 5. What is data profiling and when is it performed?
    
    Data profiling is the process of examining source data to understand its structure, content, quality, and relationships.
    
@@ -406,7 +275,7 @@
    - Helps estimate processing time and resources
    - Provides metadata for documentation
 
-6. **How do you handle null values and missing data during transformations?**
+### 6. How do you handle null values and missing data during transformations?
    
    **Strategies:**
    - **Default values**: Replace nulls with business-approved defaults (0, 'Unknown', current date)
@@ -424,7 +293,7 @@
    - Maintain audit trail of null replacements
    - Distinguish between NULL (unknown) and empty string
 
-7. **What is data standardization and why is it important?**
+### 7. What is data standardization and why is it important?
    
    Data standardization transforms data into a consistent, uniform format across all sources.
    
@@ -444,7 +313,7 @@
    - **Compliance**: Meets regulatory requirements for data consistency
    - **Searchability**: Improves query performance and data retrieval
 
-8. **How do you implement data deduplication in ETL pipelines?**
+### 8. How do you implement data deduplication in ETL pipelines?
    
    **Approaches:**
    
@@ -469,7 +338,7 @@
    - Built-in deduplication components in ETL tools
    - MDM (Master Data Management) tools for complex scenarios
 
-9. **What are lookup transformations and when are they used?**
+### 9. What are lookup transformations and when are they used?
    
    Lookup transformations retrieve additional data from reference tables based on matching keys.
    
@@ -493,7 +362,7 @@
    - Index lookup keys in reference tables
    - Consider pre-joining in source query for better performance
 
-10. **How do you handle data type conversions and format standardizations?**
+### 10. How do you handle data type conversions and format standardizations?
     
     **Data type conversions:**
     - **String to Date**: Use TO_DATE(), CAST(), STR_TO_DATE() with format patterns
@@ -518,7 +387,7 @@
 
 ## ETL Performance and Optimization
 
-1. **What strategies do you use to optimize ETL performance?**
+### 1. What strategies do you use to optimize ETL performance?
    
    - **Parallel processing**: Process multiple data streams simultaneously
    - **Partitioning**: Divide large datasets into smaller chunks
@@ -534,7 +403,7 @@
    - **Filter early**: Apply filters as early as possible in pipeline
    - **Hardware optimization**: Use appropriate CPU, memory, I/O resources
 
-2. **How do you handle large volume data processing in ETL?**
+### 2. How do you handle large volume data processing in ETL?
    
    **Strategies:**
    - **Chunking**: Process data in manageable batches
@@ -554,7 +423,7 @@
    - Schedule during off-peak hours for batch processing
    - Scale horizontally by adding more processing nodes
 
-3. **What is parallel processing in ETL and how do you implement it?**
+### 3. What is parallel processing in ETL and how do you implement it?
    
    Parallel processing executes multiple operations simultaneously to reduce overall processing time.
    
@@ -576,7 +445,7 @@
    - Handle synchronization and merge results
    - Monitor for bottlenecks (I/O, network, locks)
 
-4. **How do you identify and resolve ETL bottlenecks?**
+### 4. How do you identify and resolve ETL bottlenecks?
    
    **Identification:**
    - **Monitoring tools**: Use ETL tool performance dashboards
@@ -602,7 +471,7 @@
    - **Bulk operations**: Replace row-by-row with bulk operations
    - **Reduce data volume**: Filter early, select only needed columns
 
-5. **What is partitioning and how does it improve ETL performance?**
+### 5. What is partitioning and how does it improve ETL performance?
    
    Partitioning divides large tables into smaller, manageable segments based on a partition key.
    
@@ -626,7 +495,7 @@
    - Enable partition exchange for faster loads
    - Use partition-wise joins for better performance
 
-6. **How do you optimize SQL queries in ETL processes?**
+### 6. How do you optimize SQL queries in ETL processes?
    
    **Query optimization techniques:**
    - **Use indexes**: Create indexes on WHERE, JOIN, ORDER BY columns
@@ -648,7 +517,7 @@
    - Avoid implicit data type conversions
    - Consider materialized views for complex aggregations
 
-7. **What is the difference between pushdown optimization and in-memory processing?**
+### 7. What is the difference between pushdown optimization and in-memory processing?
    
    **Pushdown Optimization:**
    - Delegates transformation logic to the source/target database
@@ -671,7 +540,7 @@
    - **In-memory**: Complex non-SQL logic, fast memory-based operations, smaller datasets
    - **Hybrid**: Use pushdown for initial filtering, in-memory for complex transformations
 
-8. **How do you monitor ETL job performance?**
+### 8. How do you monitor ETL job performance?
    
    **Monitoring metrics:**
    - **Execution time**: Overall job duration and per-step timing
@@ -697,7 +566,7 @@
    - Maintain historical performance data for trend analysis
    - Implement automated notifications for anomalies
 
-9. **What techniques do you use for handling big data in ETL pipelines?**
+### 9. What techniques do you use for handling big data in ETL pipelines?
    
    **Technologies:**
    - **Apache Spark**: Distributed processing with in-memory computation
@@ -722,7 +591,7 @@
    - Minimize shuffling operations
    - Use predicate pushdown and column pruning
 
-10. **How do you implement incremental loads to improve performance?**
+### 10. How do you implement incremental loads to improve performance?
     
     **Change detection methods:**
     
@@ -770,7 +639,7 @@
 
 ## Data Warehousing Concepts
 
-1. **What is a data warehouse and how does it differ from a database?**
+### 1. What is a data warehouse and how does it differ from a database?
    
    A data warehouse is a centralized repository designed for analytical processing and reporting, optimized for read-heavy queries.
    
@@ -792,7 +661,7 @@
    - **Updates**: Real-time, frequent INSERT/UPDATE/DELETE
    - **Size**: Smaller, operational data only
 
-2. **What is a star schema and when is it used?**
+### 2. What is a star schema and when is it used?
    
    Star schema is a dimensional modeling design with a central fact table surrounded by dimension tables.
    
@@ -818,7 +687,7 @@
    - Fact: Sales (sale_id, date_key, product_key, customer_key, amount, quantity)
    - Dimensions: Date, Product, Customer, Store
 
-3. **What is a snowflake schema and how does it differ from a star schema?**
+### 3. What is a snowflake schema and how does it differ from a star schema?
    
    Snowflake schema is a normalized version of star schema where dimension tables are normalized into multiple related tables.
    
@@ -846,7 +715,7 @@
    - Data integrity and consistency are priorities
    - Dimension update frequency is high
 
-4. **What are fact tables and dimension tables?**
+### 4. What are fact tables and dimension tables?
    
    **Fact Tables:**
    - Store quantitative metrics/measurements (facts)
@@ -874,7 +743,7 @@
    - Customer: Customer demographics, segments
    - Geography: Location hierarchies (country → state → city)
 
-5. **What are the different types of facts (additive, semi-additive, non-additive)?**
+### 5. What are the different types of facts (additive, semi-additive, non-additive)?
    
    **Additive Facts:**
    - Can be summed across all dimensions
@@ -901,7 +770,7 @@
    - Calculated from other facts at query time or load time
    - Examples: profit = revenue - cost, average price = revenue / quantity
 
-6. **What is a data mart and how does it relate to a data warehouse?**
+### 6. What is a data mart and how does it relate to a data warehouse?
    
    A data mart is a subset of a data warehouse focused on a specific business area, department, or subject.
    
@@ -935,7 +804,7 @@
    - Lower cost than full warehouse
    - Focused on specific business requirements
 
-7. **What is OLTP versus OLAP?**
+### 7. What is OLTP versus OLAP?
    
    **OLTP (Online Transaction Processing):**
    - **Purpose**: Handle day-to-day transactions
@@ -964,7 +833,7 @@
    - **Roll-up**: Navigate from detail to summary
    - **Pivot**: Rotate data view, swap dimensions
 
-8. **What are surrogate keys and why are they used in data warehousing?**
+### 8. What are surrogate keys and why are they used in data warehousing?
    
    Surrogate keys are artificially generated unique identifiers (typically integers) assigned to dimension records, separate from natural business keys.
    
@@ -1000,7 +869,7 @@
    - Surrogate key: Customer_Key = 789 (warehouse-generated)
    - Fact table stores surrogate key for efficiency
 
-9. **What is data normalization and denormalization in context of warehousing?**
+### 9. What is data normalization and denormalization in context of warehousing?
    
    **Normalization:**
    - Process of organizing data to reduce redundancy
@@ -1036,7 +905,7 @@
    
    **Best practice**: Normalize in OLTP, denormalize in OLAP
 
-10. **How do you design a data warehouse architecture?**
+### 10. How do you design a data warehouse architecture?
     
     **Key design steps:**
     
@@ -1084,7 +953,7 @@
 
 ## ETL Testing
 
-1. **What is ETL testing and why is it important?**
+### 1. What is ETL testing and why is it important?
    
    ETL testing validates that data is accurately extracted, transformed, and loaded from source to target systems.
    
@@ -1111,7 +980,7 @@
    - Performance testing
    - Reconciliation with source systems
 
-2. **What are the different types of ETL testing (validation, transformation, performance)?**
+### 2. What are the different types of ETL testing (validation, transformation, performance)?
    
    **Data Validation Testing:**
    - Verify data completeness (row counts match)
@@ -1156,7 +1025,7 @@
    - Report accuracy verification
    - Real-world scenario testing
 
-3. **How do you validate data accuracy between source and target?**
+### 3. How do you validate data accuracy between source and target?
    
    **Record count validation:**
    ```sql
@@ -1202,7 +1071,7 @@
    - Check derived values
    - Validate transformations
 
-4. **What is the difference between source-to-staging and staging-to-target testing?**
+### 4. What is the difference between source-to-staging and staging-to-target testing?
    
    **Source-to-Staging Testing:**
    
@@ -1246,7 +1115,7 @@
    
    **Key difference**: Source-to-staging validates extraction with minimal transformation; staging-to-target validates complex business logic and transformations.
 
-5. **How do you test data transformations and business rules?**
+### 5. How do you test data transformations and business rules?
    
    **Test approach:**
    
@@ -1293,7 +1162,7 @@
    - Data type mismatches
    - Boundary values
 
-6. **What are the key validation checks in ETL testing?**
+### 6. What are the key validation checks in ETL testing?
    
    **Completeness checks:**
    - Record count reconciliation (source vs target)
@@ -1343,7 +1212,7 @@
    - Column names match target schema
    - Audit columns populated (created_date, updated_by)
 
-7. **How do you handle rejected records and error handling in ETL?**
+### 7. How do you handle rejected records and error handling in ETL?
    
    **Rejection handling strategies:**
    
@@ -1389,7 +1258,7 @@
    - Automate error correction where possible
    - Maintain error code catalog
 
-8. **What is regression testing in ETL and when is it performed?**
+### 8. What is regression testing in ETL and when is it performed?
    
    Regression testing ensures that ETL changes don't break existing functionality.
    
@@ -1443,7 +1312,7 @@
    - Use test data that covers edge cases
    - Include performance benchmarks
 
-9. **How do you test ETL workflows for different business scenarios?**
+### 9. How do you test ETL workflows for different business scenarios?
    
    **Scenario-based testing approach:**
    
@@ -1503,7 +1372,7 @@
    - Use production-like volumes for performance testing
    - Maintain test data version control
 
-10. **What tools and queries do you use for ETL validation?**
+### 10. What tools and queries do you use for ETL validation?
     
     **SQL Queries:**
     
@@ -1574,7 +1443,7 @@
 
 ## ETL Tools and Technologies
 
-1. **What are the most common ETL tools (Informatica, Talend, SSIS, AWS Glue, Apache Airflow)?**
+### 1. What are the most common ETL tools (Informatica, Talend, SSIS, AWS Glue, Apache Airflow)?
    
    **Informatica PowerCenter:**
    - Enterprise-grade ETL tool
@@ -1617,7 +1486,7 @@
    - **Apache NiFi**: Data flow automation
    - **Pentaho**: Open-source BI and ETL platform
 
-2. **What is Apache Airflow and how is it used for ETL orchestration?**
+### 2. What is Apache Airflow and how is it used for ETL orchestration?
    
    Apache Airflow is an open-source platform for authoring, scheduling, and monitoring workflows.
    
@@ -1662,7 +1531,7 @@
    - Scheduling batch processes
    - Coordinating data pipelines across systems
 
-3. **How do you implement ETL pipelines using cloud services (AWS, Azure, GCP)?**
+### 3. How do you implement ETL pipelines using cloud services (AWS, Azure, GCP)?
    
    **AWS Stack:**
    - **AWS Glue**: Serverless ETL, data cataloging
@@ -1697,7 +1566,7 @@
    - Orchestrate with native tools (Step Functions, Data Factory, Composer)
    - Leverage managed services for scalability
 
-4. **What is the difference between batch ETL tools and real-time streaming tools?**
+### 4. What is the difference between batch ETL tools and real-time streaming tools?
    
    **Batch ETL Tools:**
    - Process data in scheduled intervals (hourly, daily)
@@ -1731,7 +1600,7 @@
    - **Streaming**: Real-time decisions needed, event-driven architecture
    - **Hybrid**: Near real-time with batch benefits
 
-5. **How do you use Python for building ETL pipelines?**
+### 5. How do you use Python for building ETL pipelines?
    
    **Popular Python libraries:**
    - **pandas**: Data manipulation and transformation
@@ -1785,7 +1654,7 @@
    - Version control friendly (code-based)
    - Cost-effective (open-source)
 
-6. **What is Apache Spark and how is it used in ETL processes?**
+### 6. What is Apache Spark and how is it used in ETL processes?
    
    Apache Spark is a distributed computing framework for large-scale data processing.
    
@@ -1835,7 +1704,7 @@
    - Built-in optimization (Catalyst optimizer)
    - Cloud-native (EMR, Databricks, Dataproc)
 
-7. **How do you implement CDC (Change Data Capture) in ETL?**
+### 7. How do you implement CDC (Change Data Capture) in ETL?
    
    CDC captures and tracks changes (INSERT, UPDATE, DELETE) in source systems for incremental ETL.
    
@@ -1878,7 +1747,7 @@
    **Implementation pattern:**
    - CDC tool captures changes → Kafka/queue → ETL consumes changes → Apply to target
 
-8. **What is AWS Glue and what are its key components?**
+### 8. What is AWS Glue and what are its key components?
    
    AWS Glue is a serverless ETL service for data preparation and loading.
    
@@ -1930,7 +1799,7 @@
    - Format conversions (CSV to Parquet)
    - Data cataloging and discovery
 
-9. **How do you use dbt (data build tool) for transformations?**
+### 9. How do you use dbt (data build tool) for transformations?
    
    dbt is a transformation tool that enables data analysts to transform data using SQL SELECT statements.
    
@@ -2005,7 +1874,7 @@
    - Testing and documentation built-in
    - Works with modern data warehouses (Snowflake, BigQuery, Redshift)
 
-10. **What is the role of containerization (Docker) in ETL deployments?**
+### 10. What is the role of containerization (Docker) in ETL deployments?
     
     Docker containers package ETL applications with dependencies for consistent deployment.
     
@@ -2070,7 +1939,7 @@
 
 ## Error Handling and Logging
 
-1. **How do you implement error handling in ETL pipelines?**
+### 1. How do you implement error handling in ETL pipelines?
    
    **Error handling strategies:**
    
@@ -2131,7 +2000,7 @@
    - Test error scenarios
    - Monitor error rates and trends
 
-2. **What logging strategies do you use in ETL processes?**
+### 2. What logging strategies do you use in ETL processes?
    
    **Logging levels:**
    - **DEBUG**: Detailed diagnostic information
@@ -2192,7 +2061,7 @@
    - Structured logging (JSON format)
    - Correlation IDs for tracking across systems
 
-3. **How do you handle failed records and implement retry logic?**
+### 3. How do you handle failed records and implement retry logic?
    
    **Failed record handling:**
    
@@ -2258,7 +2127,7 @@
    - Manual correction followed by reprocessing
    - Track retry attempts per record
 
-4. **What is your approach to ETL job monitoring and alerting?**
+### 4. What is your approach to ETL job monitoring and alerting?
    
    **Monitoring dimensions:**
    
@@ -2331,7 +2200,7 @@
    - Regular alert rule reviews
    - On-call rotation for critical pipelines
 
-5. **How do you implement data lineage tracking?**
+### 5. How do you implement data lineage tracking?
    
    Data lineage tracks data flow from source to target through transformations.
    
@@ -2397,7 +2266,7 @@
    - Interactive lineage browsers
    - Column-level lineage for detailed tracking
 
-6. **What information should be captured in ETL audit logs?**
+### 6. What information should be captured in ETL audit logs?
    
    **Job execution details:**
    - Job ID/name
@@ -2471,7 +2340,7 @@
    )
    ```
 
-7. **How do you handle transactional consistency in ETL?**
+### 7. How do you handle transactional consistency in ETL?
    
    Transactional consistency ensures data integrity during ETL operations.
    
@@ -2549,7 +2418,7 @@
    - Balance transaction size vs consistency requirements
    - Cross-system consistency requires distributed transactions
 
-8. **What is your strategy for ETL rollback and recovery?**
+### 8. What is your strategy for ETL rollback and recovery?
    
    **Rollback strategies:**
    
@@ -2626,7 +2495,7 @@
    - Document recovery point objective (RPO)
    - Keep audit trail of rollbacks
 
-9. **How do you implement data quality alerts and notifications?**
+### 9. How do you implement data quality alerts and notifications?
    
    **Data quality checks:**
    
@@ -2717,7 +2586,7 @@
    - Recommended action
    - Runbook link for resolution
 
-10. **What metrics do you track for ETL pipeline health?**
+### 10. What metrics do you track for ETL pipeline health?
     
     **Performance metrics:**
     - **Execution duration**: Total job runtime
@@ -2785,7 +2654,7 @@
 
 ## Data Integration Patterns
 
-1. **What are the different data integration patterns (batch, real-time, micro-batch)?**
+### 1. What are the different data integration patterns (batch, real-time, micro-batch)?
    
    **Batch Processing:**
    - Process data in scheduled intervals (hourly, daily, weekly)
@@ -2830,7 +2699,7 @@
    - **Real-time**: Critical decisions, immediate action required
    - **Micro-batch**: Near real-time needs without streaming complexity
 
-2. **How do you implement real-time data streaming in ETL/ELT?**
+### 2. How do you implement real-time data streaming in ETL/ELT?
    
    **Streaming architecture components:**
    
@@ -2893,7 +2762,7 @@
    - Log aggregation and monitoring
    - Real-time recommendations
 
-3. **What is the Lambda architecture for data processing?**
+### 3. What is the Lambda architecture for data processing?
    
    Lambda architecture combines batch and real-time processing for comprehensive data analysis.
    
@@ -2941,7 +2810,7 @@
    - Speed layer: Track sales in last few hours
    - Serving layer: Query combines both for complete view
 
-4. **What is the Kappa architecture and how does it differ from Lambda?**
+### 4. What is the Kappa architecture and how does it differ from Lambda?
    
    Kappa architecture simplifies Lambda by using only stream processing for all data.
    
@@ -2993,7 +2862,7 @@
    - Very large historical computations
    - Different optimization for batch vs stream
 
-5. **How do you handle data from multiple heterogeneous sources?**
+### 5. How do you handle data from multiple heterogeneous sources?
    
    **Challenges:**
    - Different data formats (JSON, CSV, XML, databases)
@@ -3056,7 +2925,7 @@
    - **Integration platforms**: MuleSoft, Dell Boomi
    - **Custom frameworks**: Python with multiple libraries
 
-6. **What is API-based data integration and when is it used?**
+### 6. What is API-based data integration and when is it used?
    
    API-based integration extracts data from web services using REST, SOAP, or GraphQL APIs.
    
@@ -3146,7 +3015,7 @@
    - Complex authentication flows
    - Potentially slower than direct DB access
 
-7. **How do you implement event-driven ETL architectures?**
+### 7. How do you implement event-driven ETL architectures?
    
    Event-driven ETL triggers processing based on events rather than schedules.
    
@@ -3235,7 +3104,7 @@
    - Implement event schema versioning
    - Add circuit breakers for downstream failures
 
-8. **What is the medallion architecture (bronze, silver, gold layers)?**
+### 8. What is the medallion architecture (bronze, silver, gold layers)?
    
    Medallion architecture organizes data in progressive layers of refinement (common in data lakes).
    
@@ -3315,7 +3184,7 @@
    gold_df.write.format("delta").mode("overwrite").save("/gold/sales_by_region")
    ```
 
-9. **How do you handle schema evolution in data pipelines?**
+### 9. How do you handle schema evolution in data pipelines?
    
    Schema evolution manages changes to data structure over time without breaking pipelines.
    
@@ -3420,7 +3289,7 @@
    })
    ```
 
-10. **What is data federation versus data consolidation?**
+### 10. What is data federation versus data consolidation?
     
     **Data Consolidation (ETL/ELT approach):**
     
@@ -3532,7 +3401,7 @@
 
 ## SQL and Database Concepts for ETL
 
-1. **What are the different types of SQL joins and when do you use each?**
+### 1. What are the different types of SQL joins and when do you use each?
    
    **INNER JOIN:**
    - Returns only matching records from both tables
@@ -3588,7 +3457,7 @@
    ```
    - **Use when**: Hierarchical data, compare rows within same table
 
-2. **What is the difference between UNION and UNION ALL?**
+### 2. What is the difference between UNION and UNION ALL?
    
    **UNION:**
    - Combines result sets from multiple queries
@@ -3629,7 +3498,7 @@
    - Compatible data types in corresponding columns
    - Column order matters
 
-3. **How do you optimize SQL queries for ETL operations?**
+### 3. How do you optimize SQL queries for ETL operations?
    
    **Indexing strategies:**
    - Create indexes on join columns
@@ -3711,7 +3580,7 @@
    UPDATE STATISTICS orders;
    ```
 
-4. **What are window functions and how are they used in transformations?**
+### 4. What are window functions and how are they used in transformations?
    
    Window functions perform calculations across a set of rows related to the current row.
    
@@ -3798,7 +3667,7 @@
    -- Keeps most recent record per customer
    ```
 
-5. **What is the difference between DELETE, TRUNCATE, and DROP?**
+### 5. What is the difference between DELETE, TRUNCATE, and DROP?
    
    **DELETE:**
    - DML command, removes rows based on condition
@@ -3853,7 +3722,7 @@
    - **TRUNCATE**: Clear staging tables between runs
    - **DROP**: Remove temporary ETL tables
 
-6. **How do you implement upsert (merge) operations in ETL?**
+### 6. How do you implement upsert (merge) operations in ETL?
    
    Upsert (UPDATE or INSERT) handles both new and existing records in single operation.
    
@@ -3954,7 +3823,7 @@
    - Use staging table for large upserts
    - Consider partitioning for very large tables
 
-7. **What are indexes and how do they affect ETL performance?**
+### 7. What are indexes and how do they affect ETL performance?
    
    Indexes are database structures that improve query performance by allowing faster data retrieval.
    
@@ -4040,7 +3909,7 @@
    - Monitor index fragmentation
    - Rebuild indexes during maintenance windows
 
-8. **How do you handle transactions in ETL processes?**
+### 8. How do you handle transactions in ETL processes?
    
    Transactions ensure ACID properties (Atomicity, Consistency, Isolation, Durability) in ETL.
    
@@ -4168,7 +4037,7 @@
    - Handle deadlocks with retry logic
    - Test rollback scenarios
 
-9. **What is the difference between clustered and non-clustered indexes?**
+### 9. What is the difference between clustered and non-clustered indexes?
    
    **Clustered Index:**
    
@@ -4268,7 +4137,7 @@
    -- Contains all needed columns, no additional lookup
    ```
 
-10. **How do you use CTEs (Common Table Expressions) in ETL queries?**
+### 10. How do you use CTEs (Common Table Expressions) in ETL queries?
     
     CTEs are temporary named result sets that exist within a single query execution.
     
@@ -4415,7 +4284,7 @@
 
 ## Data Security and Governance
 
-1. **How do you implement data security in ETL pipelines?**
+### 1. How do you implement data security in ETL pipelines?
    
    **Access control:**
    - **Authentication**: Verify identity (service accounts, OAuth, MFA)
@@ -4479,7 +4348,7 @@
    - Right to deletion/modification
    - Privacy by design
 
-2. **What is data masking and when is it applied in ETL?**
+### 2. What is data masking and when is it applied in ETL?
    
    Data masking replaces sensitive data with realistic but fictitious data.
    
@@ -4559,7 +4428,7 @@
    - Analytics on sensitive data
    - Developer access to production-like data
 
-3. **How do you handle PII (Personally Identifiable Information) in ETL?**
+### 3. How do you handle PII (Personally Identifiable Information) in ETL?
    
    **Identification:**
    - **Direct PII**: Name, SSN, email, phone, address, biometrics
@@ -4662,7 +4531,7 @@
        load_to_secure_table(pii_encrypted, 'customer_pii')
    ```
 
-4. **What are the compliance requirements for ETL in regulated industries?**
+### 4. What are the compliance requirements for ETL in regulated industries?
    
    **Healthcare (HIPAA):**
    - Protect PHI (Protected Health Information)
@@ -4774,7 +4643,7 @@
    - Compliance attestations
    - SOC 2 reports
 
-5. **How do you implement data encryption in transit and at rest?**
+### 5. How do you implement data encryption in transit and at rest?
    
    **Encryption in Transit:**
    
@@ -4950,7 +4819,7 @@
    - Monitor key usage
    - Document encryption strategy
 
-6. **What is role-based access control (RBAC) in ETL systems?**
+### 6. What is role-based access control (RBAC) in ETL systems?
    
    RBAC assigns permissions based on roles rather than individual users.
    
@@ -5080,7 +4949,7 @@
    - Temporary elevated access when needed
    - Automated onboarding/offboarding
 
-7. **How do you implement data retention policies in ETL?**
+### 7. How do you implement data retention policies in ETL?
    
    **Define retention requirements:**
    - Legal/regulatory requirements
@@ -5226,7 +5095,7 @@
    - Compliance verification
    - Audit retention activities
 
-8. **What is data governance and why is it important in ETL?**
+### 8. What is data governance and why is it important in ETL?
    
    Data governance is the framework for managing data availability, usability, integrity, and security.
    
@@ -5326,7 +5195,7 @@
    - Regular data quality reports
    - Metadata capture in ETL processes
 
-9. **How do you maintain data lineage and metadata management?**
+### 9. How do you maintain data lineage and metadata management?
    
    **Data lineage tracking:**
    
@@ -5490,7 +5359,7 @@
    - Tag sensitive data
    - Version metadata changes
 
-10. **What auditing requirements should ETL processes fulfill?**
+### 10. What auditing requirements should ETL processes fulfill?
     
     **Audit trail requirements:**
     
@@ -5669,7 +5538,7 @@
 
 ## Scenario-Based and Problem-Solving
 
-1. **How would you design an ETL pipeline for a real-time fraud detection system?**
+### 1. How would you design an ETL pipeline for a real-time fraud detection system?
    
    **Architecture:**
    - Event-driven, streaming architecture
@@ -5756,7 +5625,7 @@
    - False positive/negative rates
    - System throughput and latency
 
-2. **How do you handle a scenario where source data schema changes frequently?**
+### 2. How do you handle a scenario where source data schema changes frequently?
    
    **Strategies:**
    
@@ -5829,7 +5698,7 @@
    - **Testing**: Test with various schema versions
    - **Documentation**: Keep schema change log
 
-3. **What approach would you take for migrating data from legacy systems?**
+### 3. What approach would you take for migrating data from legacy systems?
    
    **Migration strategy:**
    
@@ -5926,7 +5795,7 @@
    - Gradual decommissioning
    - Document migration for audit
 
-4. **How would you handle late-arriving dimensions in a data warehouse?**
+### 4. How would you handle late-arriving dimensions in a data warehouse?
    
    Late-arriving dimensions occur when fact records arrive before their dimension records.
    
@@ -6016,7 +5885,7 @@
    - **Root cause**: Investigate and fix source timing issues
    - **Documentation**: Define SLAs for dimension availability
 
-5. **How do you design ETL for handling both structured and unstructured data?**
+### 5. How do you design ETL for handling both structured and unstructured data?
    
    **Unified architecture:**
    
@@ -6146,7 +6015,7 @@
    - **Document processing**: Extract data from invoices, contracts
    - **Multi-modal analytics**: Integrate images, text, and metadata
 
-6. **What strategy would you use for ETL in a multi-tenant environment?**
+### 6. What strategy would you use for ETL in a multi-tenant environment?
    
    **Isolation strategies:**
    
@@ -6191,7 +6060,7 @@
    - Monitor resource usage per tenant
    - Test cross-tenant data leakage scenarios
 
-7. **How would you handle ETL for time-series data?**
+### 7. How would you handle ETL for time-series data?
    
    **Time-series characteristics:**
    - High volume, continuous data streams
@@ -6241,7 +6110,7 @@
    - Index on timestamp column
    - Partition pruning in queries
 
-8. **How do you approach ETL for data lake implementations?**
+### 8. How do you approach ETL for data lake implementations?
    
    **Data lake architecture:**
    
@@ -6298,7 +6167,7 @@
    - Automate data quality checks
    - Implement data discovery tools
 
-9. **What is your strategy for handling ETL pipeline dependencies?**
+### 9. What is your strategy for handling ETL pipeline dependencies?
    
    **Dependency types:**
    - **Data dependencies**: Job B requires completion of Job A
@@ -6353,7 +6222,7 @@
    - Monitor dependency graph complexity
    - Implement backfill capabilities for failed dependencies
 
-10. **How would you design a disaster recovery plan for ETL systems?**
+### 10. How would you design a disaster recovery plan for ETL systems?
     
     **DR planning components:**
     
@@ -6441,7 +6310,7 @@
 
 ## Advanced ETL Concepts
 
-1. **What is data virtualization and how does it compare to ETL?**
+### 1. What is data virtualization and how does it compare to ETL?
    
    Data virtualization creates a unified virtual layer that provides real-time access to data from multiple sources without physically moving or replicating it.
    
@@ -6475,7 +6344,7 @@
    - Use ETL for historical analytics and reporting
    - Virtual views on top of data warehouse
 
-2. **How do you implement data partitioning strategies in ETL?**
+### 2. How do you implement data partitioning strategies in ETL?
    
    **Partitioning types:**
    
@@ -6528,7 +6397,7 @@
    - Align ETL batch size with partitions
    - Monitor partition sizes for balance
 
-3. **What is the role of metadata in ETL processes?**
+### 3. What is the role of metadata in ETL processes?
    
    Metadata is "data about data" that describes the structure, lineage, and characteristics of data in ETL systems.
    
@@ -6590,7 +6459,7 @@
    - Better data governance
    - Simplified troubleshooting
 
-4. **How do you handle complex data transformations with business logic?**
+### 4. How do you handle complex data transformations with business logic?
    
    **Approaches for complex transformations:**
    
@@ -6642,7 +6511,7 @@
    - Handle edge cases explicitly
    - Log rule application for audit
 
-5. **What is the difference between horizontal and vertical scaling in ETL?**
+### 5. What is the difference between horizontal and vertical scaling in ETL?
    
    **Vertical scaling (Scale-up):**
    - Add more resources to existing server (CPU, RAM, storage)
@@ -6695,7 +6564,7 @@
    - Vertical: Traditional ETL tools (Informatica, SSIS)
    - Horizontal: Spark, Hadoop, cloud services with auto-scaling
 
-6. **How do you implement data quality frameworks in ETL?**
+### 6. How do you implement data quality frameworks in ETL?
    
    **Data quality dimensions:**
    - **Accuracy**: Data correctly represents reality
@@ -6749,7 +6618,7 @@
    - Root cause analysis for failures
    - Continuous improvement based on metrics
 
-7. **What is the role of machine learning in modern ETL pipelines?**
+### 7. What is the role of machine learning in modern ETL pipelines?
    
    **ML applications in ETL:**
    
@@ -6796,7 +6665,7 @@
    - Batch prediction for large datasets
    - Model versioning and A/B testing
 
-8. **How do you handle bi-temporal data in ETL?**
+### 8. How do you handle bi-temporal data in ETL?
    
    Bi-temporal data tracks two time dimensions: business time (when event occurred) and system time (when data was recorded).
    
@@ -6853,7 +6722,7 @@
    - Regulatory compliance
    - Time-travel queries
 
-9. **What is reverse ETL and when is it used?**
+### 9. What is reverse ETL and when is it used?
    
    Reverse ETL moves data from data warehouse/data lake back to operational systems and SaaS applications.
    
@@ -6909,7 +6778,7 @@
    - Empower business users with warehouse data
    - Reduce data silos
 
-10. **How do you implement DataOps practices in ETL development?**
+### 10. How do you implement DataOps practices in ETL development?
     
     DataOps applies DevOps principles to data analytics and ETL development for faster, higher-quality delivery.
     
