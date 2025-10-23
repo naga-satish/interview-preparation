@@ -1,25 +1,25 @@
 # Comprehensive PySpark Interview Questions by Topic
 
 ## Table of Contents
-* [1. PySpark Fundamentals](#1-pyspark-fundamentals)
-* [2. RDD (Resilient Distributed Datasets)](#2-rdd-resilient-distributed-datasets)
-* [3. PySpark DataFrames and Datasets](#3-pyspark-dataframes-and-datasets)
-* [4. Transformations](#4-transformations)
-* [5. Aggregations and Grouping](#5-aggregations-and-grouping)
-* [6. Joins and Data Manipulation](#6-joins-and-data-manipulation)
-* [7. Data Handling and Quality](#7-data-handling-and-quality)
-* [8. User-Defined Functions (UDFs)](#8-user-defined-functions-udfs)
-* [9. Performance Optimization](#9-performance-optimization)
-* [10. Spark SQL and Catalyst Optimizer](#10-spark-sql-and-catalyst-optimizer)
-* [11. File Formats and I/O Operations](#11-file-formats-and-io-operations)
-* [12. Spark Streaming](#12-spark-streaming)
-* [13. Cluster Architecture and Resource Management](#13-cluster-architecture-and-resource-management)
-* [14. Fault Tolerance and Reliability](#14-fault-tolerance-and-reliability)
-* [15. Delta Lake and Advanced Topics](#15-delta-lake-and-advanced-topics)
-* [16. Machine Learning with MLlib](#16-machine-learning-with-mllib)
-* [17. Scenario-Based and Coding Questions](#17-scenario-based-and-coding-questions)
+1. [PySpark Fundamentals](#pyspark-fundamentals)
+2. [RDD (Resilient Distributed Datasets)](#rdd-resilient-distributed-datasets)
+3. [PySpark DataFrames and Datasets](#pyspark-dataframes-and-datasets)
+4. [Transformations](#transformations)
+5. [Aggregations and Grouping](#aggregations-and-grouping)
+6. [Joins and Data Manipulation](#joins-and-data-manipulation)
+7. [Data Handling and Quality](#data-handling-and-quality)
+8. [User-Defined Functions (UDFs)](#user-defined-functions-udfs)
+9. [Performance Optimization](#performance-optimization)
+10. [Spark SQL and Catalyst Optimizer](#spark-sql-and-catalyst-optimizer)
+11. [File Formats and I/O Operations](#file-formats-and-io-operations)
+12. [Spark Streaming](#spark-streaming)
+13. [Cluster Architecture and Resource Management](#cluster-architecture-and-resource-management)
+14. [Fault Tolerance and Reliability](#fault-tolerance-and-reliability)
+15. [Delta Lake and Advanced Topics](#delta-lake-and-advanced-topics)
+16. [Machine Learning with MLlib](#machine-learning-with-mllib)
+17. [Scenario-Based and Coding Questions](#scenario-based-and-coding-questions)
 
-## 1. PySpark Fundamentals
+## PySpark Fundamentals
 
 1. What is PySpark and how does it differ from Apache Spark?
 
@@ -183,7 +183,7 @@
     spark = SparkSession.getActiveSession()
     ```
 
-## 2. RDD (Resilient Distributed Datasets)
+## RDD (Resilient Distributed Datasets)
 
 1. What is an RDD and what are its key characteristics?
 
@@ -373,7 +373,7 @@
 
     **Performance Note:** DataFrames are generally faster due to Catalyst optimization and Tungsten execution engine.
 
-## 3. PySpark DataFrames and Datasets
+## PySpark DataFrames and Datasets
 
 1. What is a DataFrame in PySpark and how does it differ from RDD?
 
@@ -603,7 +603,7 @@
     - Unknown/changing schema
     - Development phase
 
-## 4. Transformations
+## Transformations
 
 1. Explain the difference between narrow and wide transformations
 
@@ -818,7 +818,7 @@
 
     **Use distinct()** when deduplicating entire rows; **use dropDuplicates()** when deduplicating based on specific columns.
 
-## 5. Aggregations and Grouping
+## Aggregations and Grouping
 
 1. How do you perform group by operations in PySpark?
 
@@ -1043,7 +1043,7 @@
 
     **Note:** `count(column)` counts non-null values; `count("*")` or `count(lit(1))` counts all rows.
 
-## 6. Joins and Data Manipulation
+## Joins and Data Manipulation
 
 1. What are the different types of joins available in PySpark?
 
@@ -1276,7 +1276,7 @@
 
     **Key:** Use aliases to reference columns from different instances of the same DataFrame.
 
-## 7. Data Handling and Quality
+## Data Handling and Quality
 
 1. How do you handle missing or null values in PySpark?
 
@@ -1559,7 +1559,7 @@
     - Validate at ingestion time
     - Fail fast on critical violations
 
-## 8. User-Defined Functions (UDFs)
+## User-Defined Functions (UDFs)
 
 1. What is a UDF in PySpark and when should you use it?
 
@@ -1880,7 +1880,7 @@
 
     **Recommendation:** Always use Pandas UDFs over regular UDFs when possible.
 
-## 9. Performance Optimization
+## Performance Optimization
 
 1. How would you optimize a slow-running PySpark job?
 
@@ -2363,7 +2363,7 @@
 
     **Optimization Priority:** Focus on stages with longest duration and highest shuffle.
 
-## 10. Spark SQL and Catalyst Optimizer
+## Spark SQL and Catalyst Optimizer
 
 1. What is Spark SQL and how does it relate to DataFrames?
 
@@ -2638,7 +2638,7 @@
 
     **Enable:** `spark.conf.set("spark.sql.cbo.enabled", "true")`
 
-## 11. File Formats and I/O Operations
+## File Formats and I/O Operations
 
 1. What file formats does PySpark support?
 
@@ -2966,7 +2966,7 @@
 
     **Note:** Adding columns is safe; removing or changing types requires careful handling.
 
-## 12. Spark Streaming
+## Spark Streaming
 
 1. What is PySpark Streaming and what are its use cases?
 
@@ -3274,7 +3274,7 @@
 
     **Monitor:** Input rate, processing time, lag, state size in Spark UI.
 
-## 13. Cluster Architecture and Resource Management
+## Cluster Architecture and Resource Management
 
 1. Explain the Spark cluster architecture
 
@@ -3559,7 +3559,7 @@
 
     **Monitor:** Spark UI for memory spill and GC time.
 
-## 14. Fault Tolerance and Reliability
+## Fault Tolerance and Reliability
 
 1. How does PySpark ensure fault tolerance?
 
@@ -3885,7 +3885,7 @@
     - For production jobs
     - Enables driver restart
 
-## 15. Delta Lake and Advanced Topics
+## Delta Lake and Advanced Topics
 
 1. What is Delta Lake and how does it enhance PySpark?
 
@@ -4177,7 +4177,7 @@
     **Use Parquet** for immutable data archives.
     **Use Delta Lake** for data lakes, warehouses, and production pipelines.
 
-## 16. Machine Learning with MLlib
+## Machine Learning with MLlib
 
 1. What is MLlib in PySpark?
 
@@ -4432,7 +4432,7 @@
 
     **Note:** Pipeline models include all transformers and estimators, ensuring consistent preprocessing.
 
-## 17. Scenario-Based and Coding Questions
+## Scenario-Based and Coding Questions
 
 1. How would you remove duplicates based on specific columns?
 
