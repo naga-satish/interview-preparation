@@ -68,7 +68,15 @@ Normalization is the process of organizing data to reduce redundancy and improve
 - **BCNF:** Stricter 3NF where every determinant is a candidate key
 
 ### 3. What is First Normal Form (1NF)?
-A table is in 1NF if: (1) all columns contain atomic (indivisible) values, (2) each column contains values of a single type, (3) each column has a unique name, (4) the order of rows doesn't matter. Violation example: storing multiple phone numbers in one column as "123-456, 789-012". Solution: create separate rows or a related phone table.
+A table is in 1NF if: 
+1. all columns contain atomic (indivisible) values, 
+2.  each column contains values of a single type
+3. each column has a unique name,
+4. the order of rows doesn't matter. 
+
+Violation example: storing multiple phone numbers in one column as "123-456, 789-012". 
+
+Solution: create separate rows or a related phone table.
 
 ### 4. What is Second Normal Form (2NF)?
 A table is in 2NF if: (1) it's in 1NF, and (2) all non-key attributes are fully dependent on the entire primary key (no partial dependencies). Relevant only for tables with composite keys. Example violation: In `(student_id, course_id, student_name, grade)`, student_name depends only on student_id, not the full composite key. Solution: separate student data into its own table.
