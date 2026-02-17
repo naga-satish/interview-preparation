@@ -70,19 +70,31 @@ Normalization is the process of organizing data to reduce redundancy and improve
 ### 3. What is First Normal Form (1NF)?
 A table is in 1NF if: 
 1. all columns contain atomic (indivisible) values, 
-2.  each column contains values of a single type
+2. each column contains values of a single type
 3. each column has a unique name,
 4. the order of rows doesn't matter. 
 
-Violation example: storing multiple phone numbers in one column as "123-456, 789-012". 
+Violation example: storing multiple phone numbers in one column as "123-456, 789-012"
 
 Solution: create separate rows or a related phone table.
 
 ### 4. What is Second Normal Form (2NF)?
-A table is in 2NF if: (1) it's in 1NF, and (2) all non-key attributes are fully dependent on the entire primary key (no partial dependencies). Relevant only for tables with composite keys. Example violation: In `(student_id, course_id, student_name, grade)`, student_name depends only on student_id, not the full composite key. Solution: separate student data into its own table.
+A table is in 2NF if: 
+1. it's in 1NF
+2. all non-key attributes are fully dependent on the entire primary key (no partial dependencies). Relevant only for tables with composite keys. 
+
+Example violation: In `(student_id, course_id, student_name, grade)`, student_name depends only on student_id, not the full composite key. 
+
+Solution: separate student data into its own table.
 
 ### 5. What is Third Normal Form (3NF)?
-A table is in 3NF if: (1) it's in 2NF, and (2) no transitive dependencies exist (non-key attributes don't depend on other non-key attributes). Example violation: `(employee_id, department_id, department_name)` where department_name depends on department_id, not employee_id. Solution: create separate department table.
+A table is in 3NF if: 
+1. it's in 2NF
+2. no transitive dependencies exist (non-key attributes don't depend on other non-key attributes). 
+
+Example violation: `(employee_id, department_id, department_name)` where department_name depends on department_id, not employee_id. 
+
+Solution: create separate department table.
 
 ### 6. What is Boyce-Codd Normal Form (BCNF)?
 A stricter version of 3NF. A table is in BCNF if: for every functional dependency X → Y, X must be a super key. Addresses scenarios where 3NF still has anomalies due to overlapping candidate keys. Most tables in 3NF are also in BCNF, but BCNF eliminates all redundancy based on functional dependencies.
