@@ -1,0 +1,69 @@
+name: Copilot PR Reviewer
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+      - master
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  copilot-review:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Request Copilot Review
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const instructions = `Please review this pull request and provide:
+
+            ## 📝 What Changed
+            - List each file changed and explain what was modified in simple terms
+            - Explain the purpose/goal of these changes
+            - Describe what functionality is being added or improved
+
+            ## 🎯 What This Implements
+            - Explain what problem this solves
+            - Describe the new features or improvements
+            - Mention any new capabilities added
+
+            ## 🔍 Review Feedback
+
+            **For Python files (.py):**
+            - Code quality issues (PEP 8, readability)
+            - Potential bugs or edge cases
+            - Performance concerns
+            - Security issues
+            - Missing error handling
+            - Documentation gaps
+
+            **For Markdown files (.md):**
+            - Formatting issues (per Claude.md: Answer: prefix, no indentation, blank lines)
+            - Unclear explanations
+            - Missing examples
+            - Technical accuracy concerns
+            - Length issues (target 50-200 words per answer)
+
+            **For config/YAML files:**
+            - Syntax errors
+            - Security concerns
+            - Configuration issues
+
+            Use clear, plain English. Be specific with line numbers. Be constructive and helpful.`;
+
+            // Post comment requesting Copilot review
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: `@github-copilot\n\n${instructions}`
+            });
+
+            console.log('Copilot review requested');
